@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchIrcChat", "TwitchIrcChat\TwitchIrcChat.csproj", "{4617109F-85FF-41E5-9FC7-6DF233343D66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF0C5BBC-9C5C-46A2-BC67-29EFC4EEBE7C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupTwitchIrc", "SetupTwitchIrc\SetupTwitchIrc.vdproj", "{3913D906-CB82-4516-8AC1-C6A314DEF705}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4617109F-85FF-41E5-9FC7-6DF233343D66}.Debug|x86.ActiveCfg = Debug|x86
+		{4617109F-85FF-41E5-9FC7-6DF233343D66}.Debug|x86.Build.0 = Debug|x86
+		{4617109F-85FF-41E5-9FC7-6DF233343D66}.Release|x86.ActiveCfg = Release|x86
+		{4617109F-85FF-41E5-9FC7-6DF233343D66}.Release|x86.Build.0 = Release|x86
+		{3913D906-CB82-4516-8AC1-C6A314DEF705}.Debug|x86.ActiveCfg = Debug
+		{3913D906-CB82-4516-8AC1-C6A314DEF705}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
