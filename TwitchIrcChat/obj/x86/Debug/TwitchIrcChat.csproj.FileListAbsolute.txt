@@ -11,3 +11,12 @@ C:\Users\shawn\Desktop\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.e
 C:\Users\shawn\Desktop\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.pdb
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.exe
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.pdb
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Debug\TwitchIrcChat.exe
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Debug\TwitchIrcChat.pdb
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\MainWindow.baml
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\MainWindow.g.cs
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\App.g.cs
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat_MarkupCompile.cache
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.g.resources
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.Properties.Resources.resources
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Debug\TwitchIrcChat.csproj.GenerateResource.Cache

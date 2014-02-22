@@ -18,6 +18,7 @@ using System.Threading;
 using System.Net.Sockets;
 using WpfApplication1;
 using System.Text.RegularExpressions;
+using System.IO.IsolatedStorage;
 
 namespace TwitchIrcChat
 {
@@ -27,7 +28,7 @@ namespace TwitchIrcChat
     public partial class MainWindow : Window
     {
         Emotes emotes;
-        static string Server = "irc.twitch.tv";
+        static string Server = "199.9.252.26";
         static int Port = 6667;
         string Channel, Nick, Password, FormatedMessage, ReplyingUser;
         string LineFromReader = "";
@@ -43,7 +44,8 @@ namespace TwitchIrcChat
         Thread ReadStreamThread;
         bool isOnline = false;
         Dictionary<Paragraph, String> EveryInput;
-
+        IsolatedStorageFile isolatedStorage;
+        string isoFile = "isoFile";
 
         public MainWindow()
         {
@@ -57,6 +59,17 @@ namespace TwitchIrcChat
             //Timer.Start();
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
+            isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+            if (isolatedStorage.FileExists(isoFile))
+            {
+                RememberMe.IsChecked = true;
+                using (StreamReader sr = new StreamReader(new IsolatedStorageFileStream(isoFile, FileMode.Open, isolatedStorage)))
+                {
+                    text_user.Text = sr.ReadLine();
+                    text_chan.Text = sr.ReadLine().Replace("#", "");
+                    text_pass.Password = sr.ReadLine();
+                }
+            }
         }
 
 
@@ -494,6 +507,16 @@ namespace TwitchIrcChat
                     DataSend("jtvclient", null);
                 }
                 Timer.Start();
+                if (RememberMe.IsChecked == true)
+                {
+                    isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+                    using (StreamWriter srWriter = new StreamWriter(new IsolatedStorageFileStream(isoFile, FileMode.OpenOrCreate, isolatedStorage)))
+                    {
+                        srWriter.WriteLine(Nick);
+                        srWriter.WriteLine(Channel);
+                        srWriter.WriteLine(Password);
+                    }
+                }
             }
             else
             {

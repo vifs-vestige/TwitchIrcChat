@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_166550B73BF54F48BA1811C1BA690F68"
+        "MsmKey" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_166550B73BF54F48BA1811C1BA690F68"
+        "OwnerKey" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -43,6 +43,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -59,6 +67,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -155,15 +184,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Twitch Irc"
-        "ProductCode" = "8:{6F956A35-A755-4616-8F9C-1C389E806E39}"
-        "PackageCode" = "8:{988E711A-462A-4BDA-A71B-6B66EC64BD43}"
+        "ProductCode" = "8:{660254B4-BB29-4EDA-A827-328C3FE2CED4}"
+        "PackageCode" = "8:{88F495F7-3A10-4F0B-AD50-71883C81C54B}"
         "UpgradeCode" = "8:{52380BB7-A8FD-4C51-B827-DF452118B515}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:12th Morning"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -276,15 +305,15 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_240569C7861547B7BA6A7C8387211C02"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2A23A50CCE67492A9C732B8C22C1AEA3"
             {
-            "Name" = "8:Twitch Irc"
+            "Name" = "8:TwitchIrcChat"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_166550B73BF54F48BA1811C1BA690F68"
+            "Target" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
             "Folder" = "8:_558FA397CF4B419D9901BD2B31C01AB9"
             "WorkingFolder" = "8:_9C2821DD540342FFAB32648A55236A63"
             "Icon" = "8:"
@@ -689,7 +718,35 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1380CFD8B96F4DAEA64B519BE3A3C757"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
+            {
+            "SourcePath" = "8:..\\TwitchIrcChat\\obj\\x86\\Release\\TwitchIrcChat.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9C2821DD540342FFAB32648A55236A63"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{4617109F-85FF-41E5-9FC7-6DF233343D66}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CF8FF85C04DA499FB22C6FC0E36BD335"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"
@@ -711,34 +768,6 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:LocalizedResourceDlls"
-            "OutputProjectGuid" = "8:{4617109F-85FF-41E5-9FC7-6DF233343D66}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_166550B73BF54F48BA1811C1BA690F68"
-            {
-            "SourcePath" = "8:..\\TwitchIrcChat\\obj\\x86\\Debug\\TwitchIrcChat.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9C2821DD540342FFAB32648A55236A63"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{4617109F-85FF-41E5-9FC7-6DF233343D66}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
