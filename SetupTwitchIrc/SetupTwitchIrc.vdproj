@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
+        "MsmKey" = "8:_3659DB6115E742CE84B7D5FDEC681518"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
+        "OwnerKey" = "8:_3659DB6115E742CE84B7D5FDEC681518"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -50,6 +50,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -184,15 +197,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Twitch Irc"
-        "ProductCode" = "8:{660254B4-BB29-4EDA-A827-328C3FE2CED4}"
-        "PackageCode" = "8:{88F495F7-3A10-4F0B-AD50-71883C81C54B}"
+        "ProductCode" = "8:{D67BB430-DC51-4555-B2AB-CA393910B3E0}"
+        "PackageCode" = "8:{1EBD5A23-9E8E-4CC8-ACD8-11E4013FD86D}"
         "UpgradeCode" = "8:{52380BB7-A8FD-4C51-B827-DF452118B515}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.8"
         "Manufacturer" = "8:12th Morning"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -305,7 +318,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2A23A50CCE67492A9C732B8C22C1AEA3"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EC25B75DE3F54A27BC7012695CC2B591"
             {
             "Name" = "8:TwitchIrcChat"
             "Arguments" = "8:"
@@ -313,7 +326,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
+            "Target" = "8:_3659DB6115E742CE84B7D5FDEC681518"
             "Folder" = "8:_558FA397CF4B419D9901BD2B31C01AB9"
             "WorkingFolder" = "8:_9C2821DD540342FFAB32648A55236A63"
             "Icon" = "8:"
@@ -718,7 +731,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7EEC9393DF6B4EAF8A74CF73974DB0A2"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3659DB6115E742CE84B7D5FDEC681518"
             {
             "SourcePath" = "8:..\\TwitchIrcChat\\obj\\x86\\Release\\TwitchIrcChat.exe"
             "TargetName" = "8:"
@@ -746,7 +759,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CF8FF85C04DA499FB22C6FC0E36BD335"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6576A8A92D6B411E87127811AA5687F9"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"

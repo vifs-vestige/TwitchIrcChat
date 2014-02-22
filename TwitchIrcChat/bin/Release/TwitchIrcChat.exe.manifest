@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="TwitchIrcChat.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="TwitchIrcChat" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="TwitchIrcChat" version="1.0.0.8" language="neutral" processorArchitecture="x86" />
     <commandLine file="TwitchIrcChat.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,13 +43,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="349696">
-      <assemblyIdentity name="TwitchIrcChat" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="TwitchIrcChat" version="1.0.0.8" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/IaVPslF1r13YVwORR3LbZj1vV4=</dsig:DigestValue>
+        <dsig:DigestValue>JgQQaZpFOfnF78hBRbT12Ms84s0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -28,7 +28,7 @@ namespace TwitchIrcChat
     public partial class MainWindow : Window
     {
         Emotes emotes;
-        static string Server = "199.9.252.26";
+        static string Server = "irc.twitch.tv";
         static int Port = 6667;
         string Channel, Nick, Password, FormatedMessage, ReplyingUser;
         string LineFromReader = "";
