@@ -46,6 +46,7 @@ namespace TwitchIrcChat
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
+        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*.*";
 
         public MainWindow()
         {
@@ -168,76 +169,79 @@ namespace TwitchIrcChat
                 }
                 catch (Exception) { }
             }
-            //timeStamp.Text = "[" + DateTime.Now.Hour + ":" + DateTime.Now.Minute + "]";
-            var array = text.ToCharArray();
-            string temp = "";
-            bool isInEmote = false;
-            bool isHyperLink = false;
-            bool maybeHyperLink = true;
-            foreach (var item in array)
-            {
-                isInEmote = false;
-                maybeHyperLink = true;
-                if (item.Equals(' '))
-                {
-                    if (isHyperLink)
-                    {
-                        para.Inlines.Add(addHyperLink(temp));
-                        isHyperLink = false;
-                    }
-                    else
-                    {
-                        para.Inlines.Add(temp);
-                    }
-                    para.Inlines.Add(item + "");
-                    temp = "";
-                    maybeHyperLink = false;
-                }
-                else
-                {
-                    temp += item;
-                    foreach (var emote in emoteList)
-                    {
-                        if (emote.Equals(temp))
-                        {
-                            para.Inlines.Add(AddImageToPara(temp));
-                            temp = "";
-                            maybeHyperLink = false;
-                            break;
-                        }
-                        if (emote.Contains(temp))
-                        {
-                            isInEmote = true;
-                            break;
-                        }
-                    }
-                    if (maybeHyperLink)
-                    {
-                        Match match = Regex.Match(temp, @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*.*", RegexOptions.IgnoreCase);
-                        if (match.Success)
-                        {
-                            isHyperLink = true;
-                        }
-                    }
-                    if (!isInEmote && !maybeHyperLink)
-                    {
-                        para.Inlines.Add(temp);
-                        temp = "";
-                    }
-                }
-            }
-            if (isHyperLink)
-            {
-                para.Inlines.Add(addHyperLink(temp));
-            }
-            else
-            {
-                para.Inlines.Add(temp);
-                //para.Inlines.Add(
-            }
+            para = addImageAndHyperLinks(text, para);
             EveryInput.Add(para, user);
             chat_area.Document.Blocks.Add(para);
             chat_area.ScrollToEnd();
+        }
+
+        private bool checkSpaces(string input, int start, int end)
+        {
+            var isValid = true;
+            if (start != 0)
+            {
+                if (input[start - 1] != ' ')
+                {
+                    isValid = false;
+                }
+            }
+            if (end != input.Length)
+            {
+                if (input[end] != ' ')
+                {
+                    isValid = false;
+                }
+            }
+            return isValid;
+            
+        }
+
+        private Paragraph addImageAndHyperLinks(string input, Paragraph para)
+        {
+
+            var emoteList = emotes.CheckTextForEmotes(input);
+            emoteList.Add(RegexHyperLink);
+            var paraItems = new List<ParaInfo>();
+            foreach (var item in emoteList)
+            {
+                Regex r = new Regex(item);
+                var matches = r.Matches(input);
+                for (int i = 0; i < matches.Count; i++)
+                {
+                    var tempInfo = new ParaInfo();
+                    tempInfo.start = matches[i].Index;
+                    tempInfo.end = matches[i].Length + tempInfo.start;
+                    if (checkSpaces(input, tempInfo.start, tempInfo.end))
+                    {
+                        tempInfo.item = item;
+                        if (item == RegexHyperLink)
+                        {
+                            tempInfo.item = matches[i].Value;
+                            tempInfo.isHyper = true;
+                        }
+                        paraItems.Add(tempInfo);
+                    }
+                }
+            }
+            int tracker = 0;
+            foreach (var item in paraItems.OrderBy(x => x.start))
+            {
+                para.Inlines.Add(input.Substring(tracker, item.start - tracker));
+                if (item.isHyper)
+                {
+                    para.Inlines.Add(addHyperLink(item.item));
+                }
+                else
+                {
+                    para.Inlines.Add(AddImageToPara(item.item));
+                }
+                tracker = item.end;
+            }
+            if (paraItems.Count == 0)
+            {
+                para.Inlines.Add(input);
+            }
+            return para;
         }
 
         private Inline addHyperLink(string text)
@@ -381,7 +385,8 @@ namespace TwitchIrcChat
                     var tempUsername = LineFromReader.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     userList.Remove(tempUsername);
-                    PostText("-Parts- " + tempUsername, Brushes.LightGreen);
+                    if(ShowJoinPart.IsChecked == true)
+                        PostText("-Parts- " + tempUsername, Brushes.LightGreen);
                     updateUserList();
                 }
                 else if (LineFromReader.Contains("JOIN"))
@@ -389,7 +394,8 @@ namespace TwitchIrcChat
                     var tempUsername = LineFromReader.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     userList.Add(tempUsername);
-                    PostText("-Joins- " + tempUsername, Brushes.LightGreen);
+                    if (ShowJoinPart.IsChecked == true)
+                        PostText("-Joins- " + tempUsername, Brushes.LightGreen);
                     //textInput("-Joins- " + tempUsername);
                     updateUserList();
                 }
@@ -423,6 +429,20 @@ namespace TwitchIrcChat
             Paragraph para = new Paragraph();
 
             para.Inlines.Add(text);
+
+
+            TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
+            var tempDate = DateTime.Now;
+            if (DateFormat.Text != "")
+            {
+                try
+                {
+                    timeStamp.Text = tempDate.ToString(DateFormat.Text);
+                }
+                catch (Exception) { }
+            }
+
+
             TextRange tr = new TextRange(para.ContentStart, para.ContentEnd);
             tr.ApplyPropertyValue(TextElement.ForegroundProperty, color);
             //tr.Text = text;

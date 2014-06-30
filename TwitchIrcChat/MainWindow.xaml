@@ -33,5 +33,6 @@
         <TextBox Height="19" HorizontalAlignment="Left" Margin="215,0,0,0" Name="DateFormat" VerticalAlignment="Top" Width="69" Text="[hh:mm]" />
         <TextBlock Height="17" HorizontalAlignment="Left" Margin="141,1,0,0" Name="textBlock4" Text="Date Format" VerticalAlignment="Top" Width="76" />
         <CheckBox Content="Remember Me" Height="19" HorizontalAlignment="Left" Margin="159,25,0,0" Name="RememberMe" VerticalAlignment="Top" Width="125" />
+        <CheckBox Content="Show Join/Part" Height="16" HorizontalAlignment="Left" Margin="284,25,0,0" Name="ShowJoinPart" VerticalAlignment="Top" IsChecked="True" />
     </Grid>
 </Window>
