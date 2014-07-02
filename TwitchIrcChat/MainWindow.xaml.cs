@@ -204,7 +204,12 @@ namespace TwitchIrcChat
             var paraItems = new List<ParaInfo>();
             foreach (var item in emoteList)
             {
-                Regex r = new Regex(item);
+                var newItem = item;
+                if (item != RegexHyperLink)
+                {
+                    newItem = newItem.Replace("\\","\\\\").Replace(")", "\\)").Replace("(", "\\(");
+                }
+                Regex r = new Regex(newItem);
                 var matches = r.Matches(input);
                 for (int i = 0; i < matches.Count; i++)
                 {
@@ -457,7 +462,8 @@ namespace TwitchIrcChat
             {
                 words = LineFromReader.Split(chatSeperator, 4);
                 ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
-                FormatedMessage = words[3].TrimStart(':');
+                //FormatedMessage = words[3].TrimStart(':');
+                FormatedMessage = words[3].Remove(0, 1);
                 //chat_area.AppendText("<" + replyingUser + "> " + formatedMessage + "\r\n");
                 textInput(FormatedMessage, ReplyingUser);
                 //KeywordDetector();
