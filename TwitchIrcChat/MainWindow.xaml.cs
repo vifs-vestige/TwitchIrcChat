@@ -46,7 +46,8 @@ namespace TwitchIrcChat
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
-        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*.*";
+        //const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*.*";
+        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)";
 
         public MainWindow()
         {
@@ -242,10 +243,11 @@ namespace TwitchIrcChat
                 }
                 tracker = item.end;
             }
-            if (paraItems.Count == 0)
-            {
-                para.Inlines.Add(input);
-            }
+            //if (paraItems.Count == 0)
+            //{
+            //    para.Inlines.Add(input);
+            //}
+            para.Inlines.Add(input.Substring(tracker, input.Length - tracker));
             return para;
         }
 
