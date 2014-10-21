@@ -19,6 +19,7 @@ using System.Net.Sockets;
 using WpfApplication1;
 using System.Text.RegularExpressions;
 using System.IO.IsolatedStorage;
+using System.Windows.Controls.Primitives;
 
 namespace TwitchIrcChat
 {
@@ -46,8 +47,8 @@ namespace TwitchIrcChat
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
-        //const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*.*";
-        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)";
+        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([^\s]*)";
+        private string ContextMenuUser = "";
 
         public MainWindow()
         {
@@ -171,6 +172,11 @@ namespace TwitchIrcChat
                 catch (Exception) { }
             }
             para = addImageAndHyperLinks(text, para);
+            if (user != "" && user != "jtv")
+            {
+                ContextMenuUser = user;
+                para.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
+            }
             EveryInput.Add(para, user);
             chat_area.Document.Blocks.Add(para);
             chat_area.ScrollToEnd();
@@ -317,6 +323,7 @@ namespace TwitchIrcChat
                 var temp = new Paragraph();
                 temp.LineHeight = 1;
                 temp.Inlines.Add(item);
+                temp.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
                 Text_UserList.Document.Blocks.Add(temp);
             }
         }
@@ -628,6 +635,110 @@ namespace TwitchIrcChat
             }
         }
 
+        private void UserClick(object sender, RoutedEventArgs e)
+        {
+            //temp.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
+            var inLines = ((Paragraph)sender).Inlines;
+            if (inLines.Count() == 1)
+            {
+                var user = ((Run)inLines.First()).Text;
+                if (user.StartsWith("@"))
+                    user = user.Substring(1);
+                ContextMenuUser = user;
+            }
+            else
+            {
+                var user = ((Run)inLines.First(x=> !((Run)x).Text.Contains("<"))).Text;
+                ContextMenuUser = user;
+            }
+            Console.WriteLine(sender);
+            ContextMenu myMenu = new ContextMenu();
+
+            MenuItem userName = new MenuItem();
+            userName.Header = ContextMenuUser;
+            myMenu.Items.Add(userName);
+
+            MenuItem ban = new MenuItem();
+            ban.Header = "Ban";
+            ban.Click += new RoutedEventHandler(ban_Click);
+            MenuItem promote = new MenuItem();
+            promote.Header = "Promote";
+            promote.Click += new RoutedEventHandler(promote_Click);
+            MenuItem demote = new MenuItem();
+            demote.Header = "Demote";
+            demote.Click += new RoutedEventHandler(demote_Click);
+            MenuItem timeout = new MenuItem();
+            timeout.Header = "Timeout";
+            MenuItem t1 = new MenuItem();
+            t1.Header = "1";
+            t1.Click += new RoutedEventHandler(t1_Click);
+            timeout.Items.Add(t1);
+            MenuItem t60 = new MenuItem();
+            t60.Header = "60";
+            t60.Click += new RoutedEventHandler(t60_Click);
+            timeout.Items.Add(t60);
+            MenuItem t300 = new MenuItem();
+            t300.Header = "300";
+            t300.Click += new RoutedEventHandler(t300_Click);
+            timeout.Items.Add(t300);
+            MenuItem t600 = new MenuItem();
+            t600.Header = "600";
+            t600.Click += new RoutedEventHandler(t600_Click);
+            timeout.Items.Add(t600);
+
+            myMenu.Items.Add(timeout);
+            myMenu.Items.Add(ban);
+            myMenu.Items.Add(promote);
+            myMenu.Items.Add(demote);
+
+            ShowMenu(myMenu);
+        }
+
+        #region context menu clicks
+
+        void ban_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".ban " + ContextMenuUser);
+        }
+
+        void t600_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".timeout " + ContextMenuUser + " 600");
+        }
+
+        void t300_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".timeout " + ContextMenuUser + " 300");
+        }
+
+        void t60_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".timeout " + ContextMenuUser + " 60");
+        }
+
+        void t1_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".timeout " + ContextMenuUser + " 1");
+        }
+
+        void demote_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".unmod " + ContextMenuUser);
+        }
+
+        void promote_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage(".mod " + ContextMenuUser);
+        }
+
+        #endregion
+
+        private void ShowMenu(ContextMenu menu)
+        {
+            menu.Placement = PlacementMode.MousePoint;
+            menu.PlacementRectangle = new Rect(0.0, 0.0, 0.0, 0.0);
+            menu.IsOpen = true;
+        }
 
     }
 }
