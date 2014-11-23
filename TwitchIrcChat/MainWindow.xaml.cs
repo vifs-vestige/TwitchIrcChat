@@ -54,6 +54,14 @@ namespace TwitchIrcChat
         private Stack<string> Up = new Stack<string>();
         private Stack<string> Down = new Stack<string>();
         private const int MAXSTACKSAVE = 30;
+        private SolidColorBrush BackgroundChatColor;
+        private SolidColorBrush BackgroundUserColor;
+        private SolidColorBrush BackgroundTextBoxColor;
+        private SolidColorBrush TextColor;
+        private string DateFormat;
+        private bool ShowJoinPart;
+        private SolidColorBrush JoinPartColor;
+        private SolidColorBrush TextBoxTextColor;
 
         public MainWindow()
         {
@@ -79,7 +87,31 @@ namespace TwitchIrcChat
                     text_pass.Password = sr.ReadLine();
                 }
             }
+            LoadDefaults();
         }
+
+        private void LoadDefaults()
+        {
+            var converter = new BrushConverter();
+            BackgroundChatColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundChatColor);
+            BackgroundUserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundUserColor);
+            BackgroundTextBoxColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundTextBoxColor);
+            TextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextColor);
+            JoinPartColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.JoinPartColor);
+            TextBoxTextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextBoxTextColor);
+            DateFormat = Settings.Default.DateFormat;
+            ShowJoinPart = Settings.Default.ShowJoinPart;
+            ApplySettings();
+        }
+
+        private void ApplySettings()
+        {
+            chat_area.Background = BackgroundChatColor;
+            Text_UserList.Background = BackgroundUserColor;
+            textBox1.Background = BackgroundTextBoxColor;
+            textBox1.Foreground = TextBoxTextColor;
+        }
+
 
 
         private void SendMessage(string message)
@@ -152,6 +184,7 @@ namespace TwitchIrcChat
             return image;
         }
 
+
         private void textInput(string text, string user = "")
         {
             var emoteList = emotes.CheckTextForEmotes(text);
@@ -166,15 +199,15 @@ namespace TwitchIrcChat
                 tr.ApplyPropertyValue(TextElement.ForegroundProperty, userList.getColor(user));
                 TextRange start = new TextRange(para.ContentStart, para.ContentStart);
                 start.Text = "<";
-                start.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.White);
+                start.ApplyPropertyValue(TextElement.ForegroundProperty, TextColor);
             }
             TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
             var tempDate = DateTime.Now;
-            if (DateFormat.Text != "")
+            if (DateFormat != "")
             {
                 try
                 {
-                    timeStamp.Text = tempDate.ToString(DateFormat.Text);
+                    timeStamp.Text = tempDate.ToString(DateFormat);
                 }
                 catch (Exception) { }
             }
@@ -184,6 +217,7 @@ namespace TwitchIrcChat
                 ContextMenuUser = user;
                 para.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
             }
+            para.Foreground = TextColor;
             EveryInput.Add(para, user);
             chat_area.Document.Blocks.Add(para);
             chat_area.ScrollToEnd();
@@ -406,8 +440,8 @@ namespace TwitchIrcChat
                     var tempUsername = LineFromReader.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     userList.Remove(tempUsername);
-                    if(ShowJoinPart.IsChecked == true)
-                        PostText("-Parts- " + tempUsername, Brushes.LightGreen);
+                    if(ShowJoinPart == true)
+                        PostText("-Parts- " + tempUsername, JoinPartColor);
                     updateUserList();
                 }
                 else if (LineFromReader.Contains("JOIN"))
@@ -415,8 +449,8 @@ namespace TwitchIrcChat
                     var tempUsername = LineFromReader.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     userList.Add(tempUsername);
-                    if (ShowJoinPart.IsChecked == true)
-                        PostText("-Joins- " + tempUsername, Brushes.LightGreen);
+                    if (ShowJoinPart == true)
+                        PostText("-Joins- " + tempUsername, JoinPartColor);
                     //textInput("-Joins- " + tempUsername);
                     updateUserList();
                 }
@@ -454,11 +488,11 @@ namespace TwitchIrcChat
 
             TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
             var tempDate = DateTime.Now;
-            if (DateFormat.Text != "")
+            if (DateFormat != "")
             {
                 try
                 {
-                    timeStamp.Text = tempDate.ToString(DateFormat.Text);
+                    timeStamp.Text = tempDate.ToString(DateFormat);
                 }
                 catch (Exception) { }
             }
@@ -635,6 +669,8 @@ namespace TwitchIrcChat
             }
         }
 
+        #region stack methods
+
         private void KeepStackUnderMax()
         {
             if (Up.Count() > MAXSTACKSAVE)
@@ -690,6 +726,8 @@ namespace TwitchIrcChat
             }
             return Current;
         }
+
+#endregion
 
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
         {
@@ -824,5 +862,23 @@ namespace TwitchIrcChat
             menu.IsOpen = true;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Config config = new Config();
+            config.Show();
+        }
+
+        public void SaveConfig(Config config)
+        {
+            BackgroundChatColor = config.BackgroundChatColor;
+            BackgroundUserColor = config.BackgroundUserColor;
+            BackgroundTextBoxColor = config.BackgroundTextBoxColor;
+            TextColor = config.TextColor;
+            JoinPartColor = config.JoinPartColor;
+            TextBoxTextColor = config.TextBoxTextColor;
+            DateFormat = config.DateFormat;
+            ShowJoinPart = config.ShowJoinPart;
+            ApplySettings();
+        }
     }
 }

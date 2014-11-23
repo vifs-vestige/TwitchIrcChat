@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TwitchIrcChat" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Stuff" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hello</Value>
+    </Setting>
+    <Setting Name="BackgroundChatColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+    <Setting Name="BackgroundUserColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+    <Setting Name="BackgroundTextBoxColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="TextColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="DateFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[hh:mm]</Value>
+    </Setting>
+    <Setting Name="ShowJoinPart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="JoinPartColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF90EE90</Value>
+    </Setting>
+    <Setting Name="TextBoxTextColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

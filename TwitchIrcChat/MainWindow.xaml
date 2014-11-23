@@ -30,9 +30,7 @@
         <Button Content="Part" Height="18" HorizontalAlignment="Left" Margin="223,50,0,0" Name="button_part" VerticalAlignment="Top" Width="55" Click="button_part_Click" KeyboardNavigation.IsTabStop="False"/>
         <PasswordBox Height="19" HorizontalAlignment="Left" Margin="68,52,0,0" Name="text_pass" VerticalAlignment="Top" Width="72" KeyUp="Window_KeyUpJoin" />
         <Button Content="Clear Text" Height="18" HorizontalAlignment="Left" Margin="284,50,0,0" Name="Button_Clear" VerticalAlignment="Top" Width="72" Click="Button_Clear_Click" KeyboardNavigation.IsTabStop="False"/>
-        <TextBox Height="19" HorizontalAlignment="Left" Margin="215,0,0,0" Name="DateFormat" VerticalAlignment="Top" Width="69" Text="[hh:mm]" />
-        <TextBlock Height="17" HorizontalAlignment="Left" Margin="141,1,0,0" Name="textBlock4" Text="Date Format" VerticalAlignment="Top" Width="76" />
         <CheckBox Content="Remember Me" Height="19" HorizontalAlignment="Left" Margin="159,25,0,0" Name="RememberMe" VerticalAlignment="Top" Width="125" />
-        <CheckBox Content="Show Join/Part" Height="16" HorizontalAlignment="Left" Margin="284,25,0,0" Name="ShowJoinPart" VerticalAlignment="Top" IsChecked="True" />
+        <Button Content="Config" HorizontalAlignment="Left" Margin="308,-2,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>
