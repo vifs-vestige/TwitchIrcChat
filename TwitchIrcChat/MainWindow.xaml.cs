@@ -49,9 +49,15 @@ namespace TwitchIrcChat
         string isoFile = "isoFile";
         const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([^\s]*)";
         private string ContextMenuUser = "";
+        private string Current = "";
+        private bool IsCurrent = false;
+        private Stack<string> Up = new Stack<string>();
+        private Stack<string> Down = new Stack<string>();
+        private const int MAXSTACKSAVE = 30;
 
         public MainWindow()
         {
+            Down.Push("");
             EveryInput = new Dictionary<Paragraph, string>();
             InitializeComponent();
             emotes = new Emotes();
@@ -109,6 +115,7 @@ namespace TwitchIrcChat
                 DataSend("JOIN", Channel);
                 ReadStreamThread = new Thread(new ThreadStart(this.ReadIn));
                 ReadStreamThread.Start();
+                Console.WriteLine("ok");
             }
             catch
             {
@@ -503,6 +510,7 @@ namespace TwitchIrcChat
                 if (IsLineRead && reader != null)
                 {
                     LineFromReader = reader.ReadLine();
+                    //Console.WriteLine(LineFromReader);
                     if (LineFromReader != null)
                     {
                         IsLineRead = false;
@@ -597,14 +605,90 @@ namespace TwitchIrcChat
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
+            Console.WriteLine("stuff");
             if (e.Key == Key.Enter && isOnline)
             {
-                //textInput(textBox1.Text);
-                SendMessage(textBox1.Text);
-                textBox1.Clear();
-                //way to open links
-                //Process.Start("http://www.google.com");
+                if (!string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    SendMessage(textBox1.Text);
+
+                    if (IsCurrent && Current != "")
+                        Up.Push(Current);
+                    MoveDownToUp();
+                    
+                    IsCurrent = false;
+                    
+                    Up.Push(textBox1.Text);
+                    KeepStackUnderMax();
+                    textBox1.Clear();
+                }
             }
+            if (e.Key == Key.Up)
+            {
+                textBox1.Text = Ups();
+                IsCurrent = true;
+            }
+            if (e.Key == Key.Down)
+            {
+                textBox1.Text = Downs();
+                IsCurrent = true;
+            }
+        }
+
+        private void KeepStackUnderMax()
+        {
+            if (Up.Count() > MAXSTACKSAVE)
+            {
+                var temp = Up.ToList();
+                while (Up.Count() != 0)
+                    Up.Pop();
+                temp.Reverse();
+                temp.RemoveAt(0);
+                foreach (var item in temp)
+                {
+                    Up.Push(item);
+                }
+            }
+
+        }
+
+        private void MoveDownToUp()
+        {
+            while (Down.Count != 0)
+            {
+                var temp = Down.Pop();
+                if(temp != "")
+                    Up.Push(temp);
+            }
+            Down.Push("");
+        }
+
+        private string Ups()
+        {
+            if (Up.Count() != 0)
+            {
+                var temp = Up.Pop();
+                if (IsCurrent)
+                {
+                        Down.Push(Current);
+                }
+                Current = temp;
+            }
+            return Current;
+        }
+
+        private string Downs()
+        {
+            if (Down.Count() != 0)
+            {
+                var temp = Down.Pop();
+                if (IsCurrent)
+                {
+                    Up.Push(Current);
+                }
+                Current = temp;
+            }
+            return Current;
         }
 
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
