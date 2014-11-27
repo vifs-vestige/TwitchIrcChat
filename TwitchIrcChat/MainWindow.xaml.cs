@@ -525,9 +525,9 @@ namespace TwitchIrcChat
                 FormatedMessage = words[3].Remove(0, 1);
                 //chat_area.AppendText("<" + replyingUser + "> " + formatedMessage + "\r\n");
                 textInput(FormatedMessage, ReplyingUser);
-                if (FlashOnText)
+                if (FlashOnText && !KeepOnTop)
                     this.FlashWindow();
-                else if (FormatedMessage.ToLower().Contains(Nick) && FlashOnUser)
+                else if (FormatedMessage.ToLower().Contains(Nick) && FlashOnUser && !KeepOnTop)
                     this.FlashWindow();
                 //KeywordDetector();
             }
