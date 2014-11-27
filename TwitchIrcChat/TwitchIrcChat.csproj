@@ -112,6 +112,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="WindowExtensions.cs" />
     <Page Include="Config.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

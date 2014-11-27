@@ -62,6 +62,9 @@ namespace TwitchIrcChat
         private bool ShowJoinPart;
         private SolidColorBrush JoinPartColor;
         private SolidColorBrush TextBoxTextColor;
+        private SolidColorBrush UserColor;
+        private bool FlashOnUser;
+        private bool FlashOnText;
 
         public MainWindow()
         {
@@ -99,8 +102,11 @@ namespace TwitchIrcChat
             TextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextColor);
             JoinPartColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.JoinPartColor);
             TextBoxTextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextBoxTextColor);
+            UserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.UserColor);
             DateFormat = Settings.Default.DateFormat;
             ShowJoinPart = Settings.Default.ShowJoinPart;
+            FlashOnText = Settings.Default.FlashOnText;
+            FlashOnUser = Settings.Default.FlashOnUser;
             ApplySettings();
         }
 
@@ -108,6 +114,7 @@ namespace TwitchIrcChat
         {
             chat_area.Background = BackgroundChatColor;
             Text_UserList.Background = BackgroundUserColor;
+            Text_UserList.Foreground = UserColor;
             textBox1.Background = BackgroundTextBoxColor;
             textBox1.Foreground = TextBoxTextColor;
         }
@@ -516,6 +523,10 @@ namespace TwitchIrcChat
                 FormatedMessage = words[3].Remove(0, 1);
                 //chat_area.AppendText("<" + replyingUser + "> " + formatedMessage + "\r\n");
                 textInput(FormatedMessage, ReplyingUser);
+                if (FlashOnText)
+                    this.FlashWindow();
+                else if (FormatedMessage.ToLower().Contains(Nick) && FlashOnUser)
+                    this.FlashWindow();
                 //KeywordDetector();
             }
             catch (Exception)
@@ -574,7 +585,7 @@ namespace TwitchIrcChat
         {
             if (text_pass.Password.Contains("oauth"))
             {
-                Nick = text_user.Text.ToString();
+                Nick = text_user.Text.ToLower();
                 Password = text_pass.Password.ToString();
                 Channel = "#" + text_chan.Text.ToString();
                 if (Nick.Length > 1 && Password.Length > 1 && Channel.Length > 1)
@@ -645,13 +656,10 @@ namespace TwitchIrcChat
                 if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
                     SendMessage(textBox1.Text);
-
                     if (IsCurrent && Current != "")
                         Up.Push(Current);
                     MoveDownToUp();
-                    
                     IsCurrent = false;
-                    
                     Up.Push(textBox1.Text);
                     KeepStackUnderMax();
                     textBox1.Clear();
@@ -685,7 +693,6 @@ namespace TwitchIrcChat
                     Up.Push(item);
                 }
             }
-
         }
 
         private void MoveDownToUp()
@@ -873,12 +880,22 @@ namespace TwitchIrcChat
             BackgroundChatColor = config.BackgroundChatColor;
             BackgroundUserColor = config.BackgroundUserColor;
             BackgroundTextBoxColor = config.BackgroundTextBoxColor;
+            UserColor = config.UserColor;
             TextColor = config.TextColor;
             JoinPartColor = config.JoinPartColor;
             TextBoxTextColor = config.TextBoxTextColor;
             DateFormat = config.DateFormat;
             ShowJoinPart = config.ShowJoinPart;
+            FlashOnUser = config.FlashOnUser;
+            FlashOnText = config.FlashOnText;
             ApplySettings();
         }
+
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            this.StopFlashingWindow();
+        }
+
     }
 }

@@ -26,15 +26,19 @@ namespace TwitchIrcChat
         public bool ShowJoinPart;
         public SolidColorBrush JoinPartColor;
         public SolidColorBrush TextBoxTextColor;
+        public SolidColorBrush UserColor;
+        public bool FlashOnUser;
+        public bool FlashOnText;
         private bool Saved = false;
 
         public Config()
         {
             InitializeComponent();
             Converter = new BrushConverter();
-            //var defaultStuff = Settings.Default.Stuff;
-            //Settings.Default.Stuff = "woah";
-            //defaultStuff = Settings.Default.Stuff;
+            Flash.Items.Add("Never");
+            Flash.Items.Add("User Name");
+            Flash.Items.Add("Always");
+            Flash.SelectedItem = "Never";
             ApplyDefaults();
         }
 
@@ -46,8 +50,11 @@ namespace TwitchIrcChat
             TextColor = (SolidColorBrush)Converter.ConvertFromString(Settings.Default.TextColor);
             JoinPartColor = (SolidColorBrush)Converter.ConvertFromString(Settings.Default.JoinPartColor);
             TextBoxTextColor = (SolidColorBrush)Converter.ConvertFromString(Settings.Default.TextBoxTextColor);
+            UserColor = (SolidColorBrush)Converter.ConvertFromString(Settings.Default.UserColor);
             DateFormat = Settings.Default.DateFormat;
             ShowJoinPart = Settings.Default.ShowJoinPart;
+            FlashOnText = Settings.Default.FlashOnText;
+            FlashOnUser = Settings.Default.FlashOnUser;
 
             BackgroundChatColorPicker.SelectedColor = BackgroundChatColor.Color;
             UserListColorPicker.SelectedColor = BackgroundUserColor.Color;
@@ -55,13 +62,33 @@ namespace TwitchIrcChat
             TextColorPicker.SelectedColor = TextColor.Color;
             JoinPartColorPicker.SelectedColor = JoinPartColor.Color;
             TextBoxTextColorPicker.SelectedColor = TextBoxTextColor.Color;
+            UserListColorPicker.SelectedColor = UserColor.Color;
             DateFormatText.Text = DateFormat;
             JoinPart.IsChecked = ShowJoinPart;
+            if (FlashOnText)
+                Flash.SelectedItem = "Always";
+            if (FlashOnUser && !FlashOnText)
+                Flash.SelectedItem = "User Name";
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             Saved = true;
+            if (Flash.SelectedItem == "Never")
+            {
+                FlashOnText = false;
+                FlashOnUser = false;
+            }
+            else if (Flash.SelectedItem == "User Name")
+            {
+                FlashOnText = false;
+                FlashOnUser = true;
+            }
+            else
+            {
+                FlashOnText = true;
+                FlashOnUser = true;
+            }
             DateFormat = DateFormatText.Text;
             ShowJoinPart = (bool)JoinPart.IsChecked;
             SaveToDefaults();
@@ -79,6 +106,9 @@ namespace TwitchIrcChat
             Settings.Default.TextBoxTextColor = TextBoxTextColor.Color.ToString();
             Settings.Default.DateFormat = DateFormat;
             Settings.Default.ShowJoinPart = ShowJoinPart;
+            Settings.Default.FlashOnUser = FlashOnUser;
+            Settings.Default.FlashOnText = FlashOnText;
+            Settings.Default.UserColor = UserColor.Color.ToString();
             Settings.Default.Save();
         }
 
@@ -88,7 +118,7 @@ namespace TwitchIrcChat
             BackgroundChatColor = (SolidColorBrush)Converter.ConvertFromString(tempColor);
         }
 
-        private void UserListColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        private void UserListBackgroundColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
             var tempColor = e.NewValue.ToString();
             BackgroundUserColor = (SolidColorBrush)Converter.ConvertFromString(tempColor);
@@ -116,6 +146,12 @@ namespace TwitchIrcChat
         {
             var tempColor = e.NewValue.ToString();
             JoinPartColor = (SolidColorBrush)Converter.ConvertFromString(tempColor);
+        }
+
+        private void UserListColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            var tempColor = e.NewValue.ToString();
+            UserColor = (SolidColorBrush)Converter.ConvertFromString(tempColor);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

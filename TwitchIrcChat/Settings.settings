@@ -29,5 +29,14 @@
     <Setting Name="TextBoxTextColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#000000</Value>
     </Setting>
+    <Setting Name="FlashOnUser" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FlashOnText" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UserColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

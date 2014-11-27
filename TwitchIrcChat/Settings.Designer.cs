@@ -130,5 +130,41 @@ namespace TwitchIrcChat {
                 this["TextBoxTextColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FlashOnUser {
+            get {
+                return ((bool)(this["FlashOnUser"]));
+            }
+            set {
+                this["FlashOnUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FlashOnText {
+            get {
+                return ((bool)(this["FlashOnText"]));
+            }
+            set {
+                this["FlashOnText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string UserColor {
+            get {
+                return ((string)(this["UserColor"]));
+            }
+            set {
+                this["UserColor"] = value;
+            }
+        }
     }
 }

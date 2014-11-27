@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="362496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="365568">
       <assemblyIdentity name="TwitchIrcChat" version="1.0.0.8" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xTzaS/mHW8RFsKl/8xWdAJvV7l8=</dsig:DigestValue>
+        <dsig:DigestValue>tjnGM9yr/3tZhzyeh4rK8QhbXIg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -245,13 +245,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="TwitchIrcChat.exe.config" size="1835">
+  <file name="TwitchIrcChat.exe.config" size="2210">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>icBt0PFhT1B0dH/E+bd6XFMfmlE=</dsig:DigestValue>
+      <dsig:DigestValue>9BkAE7CiY/mWKpzVROHgTpgtMcw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
