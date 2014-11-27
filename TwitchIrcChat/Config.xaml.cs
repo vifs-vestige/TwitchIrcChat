@@ -29,7 +29,9 @@ namespace TwitchIrcChat
         public SolidColorBrush UserColor;
         public bool FlashOnUser;
         public bool FlashOnText;
+        public bool KeepOnTop;
         private bool Saved = false;
+
 
         public Config()
         {
@@ -55,6 +57,7 @@ namespace TwitchIrcChat
             ShowJoinPart = Settings.Default.ShowJoinPart;
             FlashOnText = Settings.Default.FlashOnText;
             FlashOnUser = Settings.Default.FlashOnUser;
+            KeepOnTop = Settings.Default.KeepOnTop;
 
             BackgroundChatColorPicker.SelectedColor = BackgroundChatColor.Color;
             UserListColorPicker.SelectedColor = BackgroundUserColor.Color;
@@ -65,6 +68,7 @@ namespace TwitchIrcChat
             UserListColorPicker.SelectedColor = UserColor.Color;
             DateFormatText.Text = DateFormat;
             JoinPart.IsChecked = ShowJoinPart;
+            OnTop.IsChecked = KeepOnTop;
             if (FlashOnText)
                 Flash.SelectedItem = "Always";
             if (FlashOnUser && !FlashOnText)
@@ -91,6 +95,7 @@ namespace TwitchIrcChat
             }
             DateFormat = DateFormatText.Text;
             ShowJoinPart = (bool)JoinPart.IsChecked;
+            KeepOnTop = (bool)OnTop.IsChecked;
             SaveToDefaults();
             MainWindow main = (MainWindow)Application.Current.MainWindow;
             main.SaveConfig(this);
@@ -109,6 +114,7 @@ namespace TwitchIrcChat
             Settings.Default.FlashOnUser = FlashOnUser;
             Settings.Default.FlashOnText = FlashOnText;
             Settings.Default.UserColor = UserColor.Color.ToString();
+            Settings.Default.KeepOnTop = KeepOnTop;
             Settings.Default.Save();
         }
 

@@ -26,6 +26,8 @@
         <ComboBox x:Name="Flash" HorizontalAlignment="Left" Height="22" Margin="10,219,0,0" VerticalAlignment="Top" Width="135"/>
         <TextBlock HorizontalAlignment="Left" Height="20" Margin="330,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" IsEnabled="False" ><Run Text="User List Color"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
         <xctk:ColorPicker x:Name="UserListColorPicker" Margin="330,96,10,139" SelectedColorChanged="UserListColorPicker_SelectedColorChanged" />
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="179,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" IsEnabled="False"><Run Text="Keep On Top"/><LineBreak/><Run/></TextBlock>
+        <CheckBox x:Name="OnTop" Content="Keep On Top" HorizontalAlignment="Left" Height="22" Margin="179,219,0,0" VerticalAlignment="Top" Width="135"/>
     </Grid>
 
 </Window>

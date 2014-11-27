@@ -65,6 +65,7 @@ namespace TwitchIrcChat
         private SolidColorBrush UserColor;
         private bool FlashOnUser;
         private bool FlashOnText;
+        private bool KeepOnTop;
 
         public MainWindow()
         {
@@ -107,6 +108,7 @@ namespace TwitchIrcChat
             ShowJoinPart = Settings.Default.ShowJoinPart;
             FlashOnText = Settings.Default.FlashOnText;
             FlashOnUser = Settings.Default.FlashOnUser;
+            KeepOnTop = Settings.Default.KeepOnTop;
             ApplySettings();
         }
 
@@ -888,6 +890,7 @@ namespace TwitchIrcChat
             ShowJoinPart = config.ShowJoinPart;
             FlashOnUser = config.FlashOnUser;
             FlashOnText = config.FlashOnText;
+            KeepOnTop = config.KeepOnTop;
             ApplySettings();
         }
 
@@ -895,6 +898,19 @@ namespace TwitchIrcChat
         private void Window_Activated(object sender, EventArgs e)
         {
             this.StopFlashingWindow();
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            if (KeepOnTop)
+            {
+                this.Topmost = true;
+                //this.Activate();
+            }
+            else
+            {
+                this.Topmost = false;
+            }
         }
 
     }

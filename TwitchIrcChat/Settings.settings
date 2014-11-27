@@ -38,5 +38,8 @@
     <Setting Name="UserColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFFFF</Value>
     </Setting>
+    <Setting Name="KeepOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
