@@ -44,10 +44,11 @@ namespace TwitchIrcChat
         TcpClient IRCconnection = null;
         Thread ReadStreamThread;
         bool isOnline = false;
+        bool isDisconnected = false;
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
-        const string RegexHyperLink = @"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([^\s]*)";
+        const string RegexHyperLink = @"(http(s?):\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,15}(:[0-9]{1,5})?(\/.*)?";
         private string ContextMenuUser = "";
         private string Current = "";
         private bool IsCurrent = false;
@@ -262,11 +263,16 @@ namespace TwitchIrcChat
             foreach (var item in emoteList)
             {
                 var newItem = item;
+                Regex r;
                 if (item != RegexHyperLink)
                 {
-                    newItem = newItem.Replace("\\","\\\\").Replace(")", "\\)").Replace("(", "\\(");
+                    newItem = newItem.Replace("\\", "\\\\").Replace(")", "\\)").Replace("(", "\\(");
+                    r = new Regex(newItem);
                 }
-                Regex r = new Regex(newItem);
+                else
+                {
+                     r = new Regex(newItem, RegexOptions.IgnoreCase);
+                }
                 var matches = r.Matches(input);
                 for (int i = 0; i < matches.Count; i++)
                 {
@@ -285,6 +291,29 @@ namespace TwitchIrcChat
                     }
                 }
             }
+            //var itemsCount = 0;
+            //foreach (var item in input.Split(' '))
+            //{
+            //    //var temp = item;
+            //    //if (!item.StartsWith("http"))
+            //    //    temp = "http://" + item;
+            //    //if (temp.IsValidUrl())
+            //    //if(Uri.IsWellFormedUriString(item, UriKind.Relative))
+            //        Uri uri;
+    
+            //    if(Uri.TryCreate(item, UriKind.Absolute, out uri)
+            //        && (uri.Scheme == Uri.UriSchemeHttp
+            //        || uri.Scheme == Uri.UriSchemeHttps))
+            //    {
+            //        var tempInfo = new ParaInfo();
+            //        tempInfo.start = itemsCount;
+            //        tempInfo.end = item.Length + tempInfo.start;
+            //        tempInfo.item = item;
+            //        tempInfo.isHyper = true;
+            //        paraItems.Add(tempInfo);
+            //    }
+            //    itemsCount += item.Length + 1;
+            //}
             int tracker = 0;
             foreach (var item in paraItems.OrderBy(x => x.start))
             {
@@ -381,12 +410,21 @@ namespace TwitchIrcChat
         //timer that loops to post read in lines from the stream
         private void UpdateText_Tick(object sender, EventArgs e)
         {
+            if (isDisconnected)
+            {
+                Part();
+            }
             if (!IsLineRead && isOnline)
             {
                 Console.WriteLine("STUFF");
                 //if (LineFromReader != null)
                 //    PostText(LineFromReader, Brushes.Gray);
                 Console.WriteLine(LineFromReader);
+                if (LineFromReader.Equals(":tmi.twitch.tv NOTICE * :Login unsuccessful"))
+                {
+                    //show login unsuccesfful meseeage
+                    PostText("Login Unsuccessful, check oauth password", JoinPartColor);
+                }
                 if (LineFromReader.Contains("PRIVMSG"))
                 {
                     if (LineFromReader.Contains(":USERCOLOR"))
@@ -424,14 +462,6 @@ namespace TwitchIrcChat
                     }
                     updateUserList();
                 }
-                //else if ((LineFromReader.ToLower().Contains("mode ")) && !(LineFromReader.ToLower().Contains(" +o")))
-                //{
-                //    string[] tempMods;
-                //    tempMods = LineFromReader.Split(' ');
-                //    UserList.Add(tempMods[tempMods.Length - 1]);
-                //    //chat_area.AppendText(LineFromReader + "\r\n");
-                //    textInput(LineFromReader);
-                //}
                 else if ((LineFromReader.ToLower().Contains("mode ")) && (LineFromReader.ToLower().Contains(" +o")))
                 {
                     string[] tempMods;
@@ -440,9 +470,6 @@ namespace TwitchIrcChat
                     userList.Add(tempMod);
                     userList.AddMod(tempMod);
                     updateUserList();
-                    //UserList.Add(tempMods[tempMods.Length - 1]);
-                    //chat_area.AppendText(LineFromReader + "\r\n");
-                    //textInput(LineFromReader);
                 }
                 else if (LineFromReader.Contains("PART"))
                 {
@@ -460,7 +487,6 @@ namespace TwitchIrcChat
                     userList.Add(tempUsername);
                     if (ShowJoinPart == true)
                         PostText("-Joins- " + tempUsername, JoinPartColor);
-                    //textInput("-Joins- " + tempUsername);
                     updateUserList();
                 }
                 else
@@ -552,18 +578,29 @@ namespace TwitchIrcChat
 
         private void ReadIn()
         {
+            Console.WriteLine("OH SHIT");
             while (true && isOnline)
             {
-                if (IsLineRead && reader != null)
+                try
                 {
-                    LineFromReader = reader.ReadLine();
-                    //Console.WriteLine(LineFromReader);
-                    if (LineFromReader != null)
+                    if (IsLineRead && reader != null)
                     {
-                        IsLineRead = false;
+                        LineFromReader = reader.ReadLine();
+                        //Console.WriteLine(LineFromReader);
+                        if (LineFromReader.Contains("butts"))
+                            throw new Exception();
+                        if (LineFromReader != null)
+                        {
+                            IsLineRead = false;
+                        }
                     }
+                    Thread.Sleep(Timer.Interval);
                 }
-                Thread.Sleep(Timer.Interval);
+                catch (Exception e)
+                {
+                    isDisconnected = true;
+                    break;
+                }
             }
         }
 
@@ -587,14 +624,16 @@ namespace TwitchIrcChat
         {
             if (text_pass.Password.Contains("oauth"))
             {
+
                 Nick = text_user.Text.ToLower();
                 Password = text_pass.Password.ToString();
                 Channel = "#" + text_chan.Text.ToString();
                 if (Nick.Length > 1 && Password.Length > 1 && Channel.Length > 1)
                 {
-                    isOnline = true;
                     Connect();
                     DataSend("jtvclient", null);
+                    isOnline = true;
+                    isDisconnected = false;
                 }
                 Timer.Start();
                 if (RememberMe.IsChecked == true)
@@ -633,8 +672,12 @@ namespace TwitchIrcChat
 
         private void Part()
         {
-            if (isOnline)
+            if (isOnline || isDisconnected)
             {
+                if (isDisconnected)
+                {
+                    PostText("Disconnected from server", JoinPartColor);
+                }
                 isOnline = false;
                 IsLineRead = false;
                 DataSend("PART", Channel);
@@ -746,17 +789,20 @@ namespace TwitchIrcChat
 
         #endregion
 
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            this.SetPlacement(Settings.Default.MainWIndowPlacement);
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Settings.Default.MainWIndowPlacement = this.GetPlacement();
+            Settings.Default.Save();
             Part();
             Application.Current.Shutdown();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Part();
-            Application.Current.Shutdown();
-        }
 
         private void Window_KeyUpJoin(object sender, KeyEventArgs e)
         {

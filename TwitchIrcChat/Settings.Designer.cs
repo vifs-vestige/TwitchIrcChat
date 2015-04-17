@@ -178,5 +178,17 @@ namespace TwitchIrcChat {
                 this["KeepOnTop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MainWIndowPlacement {
+            get {
+                return ((string)(this["MainWIndowPlacement"]));
+            }
+            set {
+                this["MainWIndowPlacement"] = value;
+            }
+        }
     }
 }

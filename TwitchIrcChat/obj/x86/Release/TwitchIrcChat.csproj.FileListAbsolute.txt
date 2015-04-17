@@ -24,7 +24,6 @@ C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\TwitchIr
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\TwitchIrcChat.application
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.exe.manifest
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.application
-C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.csprojResolveAssemblyReference.cache
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\Config.baml
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\Config.g.cs
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Xceed.Wpf.AvalonDock.dll

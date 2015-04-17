@@ -105,6 +105,9 @@
     <Compile Include="Config.xaml.cs">
       <DependentUpon>Config.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ParaInfo.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,6 +116,7 @@
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="WindowExtensions.cs" />
+    <Compile Include="WindowPlacement.cs" />
     <Page Include="Config.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
