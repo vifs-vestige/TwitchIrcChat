@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="TwitchIRC" Height="300" Width="420" WindowState="Normal" ResizeMode="CanResize"  VerticalContentAlignment="Bottom" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" MinWidth="400" MinHeight="200" Closing="Window_Closing" Activated="Window_Activated" Deactivated="Window_Deactivated">
     <Grid >
-        
+
         <Image HorizontalAlignment="Left" Margin="349,366,0,80" Name="image_test" Stretch="Fill"  Width="0"  />
         <TextBox Height="25" HorizontalAlignment="Stretch" Name="textBox1"  VerticalAlignment="Bottom" Width="Auto" KeyUp="Window_KeyUp" 
                  ClipToBounds="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  />
@@ -11,26 +11,103 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
             <RichTextBox HorizontalAlignment="Left" Margin="0,0,100,0" Name="chat_area" VerticalAlignment="Stretch" Width="Auto" IsReadOnly="True" 
                      VerticalScrollBarVisibility="Visible" ClipToBounds="True" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" IsEnabled="True" Background="#FD000000" Foreground="White" FontSize="15" IsDocumentEnabled="True">
-                
+
                 <FlowDocument Name="chat_flow" TextAlignment="Left" >
+                    <Paragraph>
+                        <InlineUIContainer>
+
+                        </InlineUIContainer>
+                    </Paragraph>
                 </FlowDocument>
             </RichTextBox>
             <RichTextBox Background="Black"  Width="100" ClipToBounds="True" HorizontalAlignment="Right" IsReadOnly="True" Name="Text_UserList" Foreground="White">
-                
+
             </RichTextBox>
+            <TabControl HorizontalAlignment="Stretch" Margin="0,0,100,0" Width="Auto" x:Name="TabControl" Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True" VerticalAlignment="Stretch" Height="Auto" >
+                <TabControl.Resources>
+                    <Style x:Key="TabScrollerRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border Background="sc#1, 0.366693377, 0.372125238, 0.6931424">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <ControlTemplate x:Key="TabControlControlTemplate1" TargetType="{x:Type TabControl}">
+                        <Grid x:Name="Grid" KeyboardNavigation.TabNavigation="Local">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="ColumnDefinition0"/>
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="1" Grid.Column="0" x:Name="ContentPanel" BorderBrush="#FFD0CEBF" BorderThickness="0,0,1,1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained">
+                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Border Background="{TemplateBinding Background}" x:Name="Border1">
+                                        <ContentPresenter DataContext="{x:Null}" Margin="{TemplateBinding Padding}" x:Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" ContentTemplateSelector="{TemplateBinding SelectedContentTemplateSelector}" ContentSource="SelectedContent"/>
+                                    </Border>
+                                </Border>
+                            </Border>
+                            <ScrollViewer x:Name="HeaderPanel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                <ScrollViewer.Style>
+                                    <Style TargetType="{x:Type ScrollViewer}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Grid Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" x:Name="HeaderPanel">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="25"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="25"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <RepeatButton Grid.Column="0" Content="&lt;" Command="ScrollBar.LineLeftCommand" Style="{DynamicResource TabScrollerRepeatButtonStyle}"/>
+                                                        <ScrollContentPresenter Grid.Column="1" Content="{TemplateBinding ScrollViewer.Content}" />
+                                                        <RepeatButton Grid.Column="2" Content="&gt;" Command="ScrollBar.LineRightCommand" Style="{DynamicResource TabScrollerRepeatButtonStyle}"/>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ScrollViewer.Style>
+                                <StackPanel IsItemsHost="true" Orientation="Horizontal" Background="{x:Null}" KeyboardNavigation.TabIndex="1" />
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </TabControl.Resources>
+                <TabItem x:Name="ServerTab" Header="Server" Selector.Selected="OnServerTabSelected">
+                    <RichTextBox Background="Black" x:Name="ServerChatArea" FontSize="15" IsDocumentEnabled="True" VerticalScrollBarVisibility="Visible" >
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
+                </TabItem>
+            </TabControl>
+
         </Grid>
         <TextBlock Height="18" HorizontalAlignment="Left" Name="textBlock1" Text="Username:" VerticalAlignment="Top" Width="62" />
-        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,0,0,0" Name="text_user" VerticalAlignment="Top" Width="72" KeyUp="Window_KeyUpJoin"/>
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,0,0,0" Name="text_user" VerticalAlignment="Top" Width="72"/>
         <TextBlock Height="17" HorizontalAlignment="Left" Margin="1,52,0,0" Name="textBlock2" Text="Password:" VerticalAlignment="Top" Width="93" />
         <TextBlock Height="19" HorizontalAlignment="Left" Margin="1,25,0,0" Name="textBlock3" Text="Channel:" VerticalAlignment="Top" Width="76" />
-        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,25,0,0" Name="text_chan" VerticalAlignment="Top" Width="72" KeyUp="Window_KeyUpJoin"/>
+        <TextBox Height="19" HorizontalAlignment="Left" Margin="68,25,0,0" Name="text_chan" VerticalAlignment="Top" Width="72" />
         <Button Content="Join" Height="18" HorizontalAlignment="Left" Margin="159,50,0,0" Name="button_join" VerticalAlignment="Top" Width="58" Click="button_join_Click" KeyboardNavigation.IsTabStop="False"/>
         <Button Content="Part" Height="18" HorizontalAlignment="Left" Margin="223,50,0,0" Name="button_part" VerticalAlignment="Top" Width="55" Click="button_part_Click" KeyboardNavigation.IsTabStop="False"/>
-        <PasswordBox Height="19" HorizontalAlignment="Left" Margin="68,52,0,0" Name="text_pass" VerticalAlignment="Top" Width="72" KeyUp="Window_KeyUpJoin" />
+        <Button Content="Connect" Height="18" HorizontalAlignment="Left" Name="Button_Connect" VerticalAlignment="Top" Margin="159,25,0,0" Width="58" Click="button_connect_Click"></Button>
+        <PasswordBox Height="19" HorizontalAlignment="Left" Margin="68,52,0,0" Name="text_pass" VerticalAlignment="Top" Width="72" />
         <Button Content="Clear Text" Height="18" HorizontalAlignment="Left" Margin="284,50,0,0" Name="Button_Clear" VerticalAlignment="Top" Width="72" Click="Button_Clear_Click" KeyboardNavigation.IsTabStop="False"/>
-        <CheckBox Content="Remember Me" Height="19" HorizontalAlignment="Left" Margin="159,25,0,0" Name="RememberMe" VerticalAlignment="Top" Width="125" />
-        <Button Content="Config" HorizontalAlignment="Left" Margin="308,-2,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <CheckBox Content="Remember Me" Height="19" HorizontalAlignment="Left" Margin="159,1,0,0" Name="RememberMe" VerticalAlignment="Top" Width="125" />
+        <Button Content="Config" HorizontalAlignment="Left" Margin="223,25,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Height="18"/>
     </Grid>
 </Window>

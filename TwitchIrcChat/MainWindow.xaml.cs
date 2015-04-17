@@ -28,10 +28,10 @@ namespace TwitchIrcChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        Emotes emotes;
-        static string Server = "irc.twitch.tv";
-        static int Port = 6667;
-        string Channel, Nick, Password, FormatedMessage, ReplyingUser;
+        public Emotes EmoteList;
+        public static string Server = "irc.twitch.tv";
+        public static int Port = 6667;
+        public string Channel, Nick, Password, FormatedMessage, ReplyingUser;
         string LineFromReader = "";
         StreamReader reader = null;
         StreamWriter writer = null;
@@ -39,45 +39,59 @@ namespace TwitchIrcChat
         bool IsLineRead = true;
         DispatcherTimer Timer;
         UserList userList;
-        char[] chatSeperator = { ' ' };
+        public char[] ChatSeperator = { ' ' };
         public string[] words;
-        TcpClient IRCconnection = null;
+        public TcpClient IRCconnection = null;
         Thread ReadStreamThread;
         bool isOnline = false;
         bool isDisconnected = false;
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
-        const string RegexHyperLink = @"(http(s?):\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,15}(:[0-9]{1,5})?(\/.*)?";
-        private string ContextMenuUser = "";
-        private string Current = "";
+        public const string RegexHyperLink = @"(http(s?):\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,15}(:[0-9]{1,5})?(\/.*)?";
+        public string ContextMenuUser = "";
+        public string Current = "";
         private bool IsCurrent = false;
         private Stack<string> Up = new Stack<string>();
         private Stack<string> Down = new Stack<string>();
-        private const int MAXSTACKSAVE = 30;
-        private SolidColorBrush BackgroundChatColor;
-        private SolidColorBrush BackgroundUserColor;
-        private SolidColorBrush BackgroundTextBoxColor;
-        private SolidColorBrush TextColor;
-        private string DateFormat;
-        private bool ShowJoinPart;
-        private SolidColorBrush JoinPartColor;
-        private SolidColorBrush TextBoxTextColor;
-        private SolidColorBrush UserColor;
-        private bool FlashOnUser;
-        private bool FlashOnText;
-        private bool KeepOnTop;
+        public const int MAXSTACKSAVE = 30;
+        public SolidColorBrush BackgroundChatColor;
+        public SolidColorBrush BackgroundUserColor;
+        public SolidColorBrush BackgroundTextBoxColor;
+        public SolidColorBrush TextColor;
+        public string DateFormat;
+        public bool ShowJoinPart;
+        public SolidColorBrush JoinPartColor;
+        public SolidColorBrush TextBoxTextColor;
+        public SolidColorBrush UserColor;
+        public bool FlashOnUser;
+        public bool FlashOnText;
+        public bool KeepOnTop;
+        private List<TabWindow> Tabs;
+        private int CurrentTab;
+        private UserList EmptyUserList;
+        private Image Image_test;
+
+
+        public void UpdateSelected(UserList temp, int tabIndex = 0)
+        {
+            CurrentTab = tabIndex;
+            userList = temp;
+            updateUserList();
+        }
 
         public MainWindow()
         {
+            EmptyUserList = new UserList();
             Down.Push("");
             EveryInput = new Dictionary<Paragraph, string>();
             InitializeComponent();
-            emotes = new Emotes();
+            EmoteList = new Emotes();
             image_test.Width = 0;
-            Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromMilliseconds(200);
-            Timer.Tick += new EventHandler(UpdateText_Tick);
+            Image_test = image_test;
+            //Timer = new DispatcherTimer();
+            //Timer.Interval = TimeSpan.FromMilliseconds(200);
+            //Timer.Tick += new EventHandler(UpdateText_Tick);
             //Timer.Start();
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
@@ -93,6 +107,7 @@ namespace TwitchIrcChat
                 }
             }
             LoadDefaults();
+            Tabs = new List<TabWindow>();
         }
 
         private void LoadDefaults()
@@ -135,47 +150,37 @@ namespace TwitchIrcChat
 
         private void Connect()
         {
-            try
+            if (text_pass.Password.Contains("oauth"))
             {
-                IRCconnection = new TcpClient(Server, Port);
-            }
-            catch
-            {
-                Paragraph para = new Paragraph();
-                para.Inlines.Add("Connection Failed");
-                chat_area.Document.Blocks.Add(para);
-                chat_area.ScrollToEnd();
-            }
-            try
-            {
-                ns = IRCconnection.GetStream();
-                reader = new StreamReader(ns);
-                writer = new StreamWriter(ns);
-                DataSend("PASS", Password);
-                DataSend("NICK", Nick);
-                DataSend("USER", Nick);
-                DataSend("JOIN", Channel);
-                ReadStreamThread = new Thread(new ThreadStart(this.ReadIn));
-                ReadStreamThread.Start();
-                Console.WriteLine("ok");
-            }
-            catch
-            {
-                chat_area.AppendText("Communication Error");
-            }
-            finally
-            {
-                if (reader == null)
+                Nick = text_user.Text.ToLower();
+                Password = text_pass.Password.ToString();
+                Channel = "#" + text_chan.Text.ToString();
+                if (Nick.Length > 1 && Password.Length > 1 && Channel.Length > 1)
                 {
-                    reader.Close();
+                    textInput("Connected");
+                    //DataSend("jtvclient", null);
+                    isOnline = true;
+                    isDisconnected = false;
                 }
-                if (writer == null)
+                //Timer.Start();
+                if (RememberMe.IsChecked == true)
                 {
-                    writer.Close();
+                    isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+                    using (StreamWriter srWriter = new StreamWriter(new IsolatedStorageFileStream(isoFile, FileMode.OpenOrCreate, isolatedStorage)))
+                    {
+                        srWriter.WriteLine(Nick);
+                        srWriter.WriteLine(Channel);
+                        srWriter.WriteLine(Password);
+                    }
                 }
-                if (ns == null)
+            }
+            else
+            {
+                if (MessageBox.Show("You need to generate an oauth twitch password at http://twitchapps.com/tmi/",
+                    "Oauth Password Error",
+                    MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                 {
-                    ns.Close();
+                    Process.Start("http://twitchapps.com/tmi/");
                 }
             }
         }
@@ -184,7 +189,7 @@ namespace TwitchIrcChat
 
         private Image AddImageToPara(string text)
         {
-            var emoteImgSrc = emotes.EmoteList[text];
+            var emoteImgSrc = EmoteList.EmoteList[text];
             BitmapImage bitmap = new BitmapImage(new Uri(@"/Emotes/" + emoteImgSrc, UriKind.RelativeOrAbsolute));
             Image image = new Image();
             image.Source = bitmap;
@@ -195,9 +200,9 @@ namespace TwitchIrcChat
         }
 
 
-        private void textInput(string text, string user = "")
+        public void textInput(string text, string user = "")
         {
-            var emoteList = emotes.CheckTextForEmotes(text);
+            var emoteList = EmoteList.CheckTextForEmotes(text);
             Paragraph para = new Paragraph();
             para.LineHeight = 1;
             if (user.Length > 1)
@@ -229,8 +234,10 @@ namespace TwitchIrcChat
             }
             para.Foreground = TextColor;
             EveryInput.Add(para, user);
-            chat_area.Document.Blocks.Add(para);
-            chat_area.ScrollToEnd();
+            //chat_area.Document.Blocks.Add(para);
+            //chat_area.ScrollToEnd();
+            ServerChatArea.Document.Blocks.Add(para);
+            ServerChatArea.ScrollToEnd();
         }
 
         private bool checkSpaces(string input, int start, int end)
@@ -257,7 +264,7 @@ namespace TwitchIrcChat
         private Paragraph addImageAndHyperLinks(string input, Paragraph para)
         {
 
-            var emoteList = emotes.CheckTextForEmotes(input);
+            var emoteList = EmoteList.CheckTextForEmotes(input);
             emoteList.Add(RegexHyperLink);
             var paraItems = new List<ParaInfo>();
             foreach (var item in emoteList)
@@ -407,96 +414,6 @@ namespace TwitchIrcChat
             }
         }
 
-        //timer that loops to post read in lines from the stream
-        private void UpdateText_Tick(object sender, EventArgs e)
-        {
-            if (isDisconnected)
-            {
-                Part();
-            }
-            if (!IsLineRead && isOnline)
-            {
-                Console.WriteLine("STUFF");
-                //if (LineFromReader != null)
-                //    PostText(LineFromReader, Brushes.Gray);
-                Console.WriteLine(LineFromReader);
-                if (LineFromReader.Equals(":tmi.twitch.tv NOTICE * :Login unsuccessful"))
-                {
-                    //show login unsuccesfful meseeage
-                    PostText("Login Unsuccessful, check oauth password", JoinPartColor);
-                }
-                if (LineFromReader.Contains("PRIVMSG"))
-                {
-                    if (LineFromReader.Contains(":USERCOLOR"))
-                    {
-                        parseColor(LineFromReader);
-                    }
-                    else if(LineFromReader.Contains(":CLEAR")){
-                        ClearText(LineFromReader);
-                    }
-                    else
-                    {
-                        WordSplitter();
-                    }
-                }
-                else if (LineFromReader.Contains("PING"))
-                {
-                    PingHandler();
-                }
-                else if (LineFromReader.Contains("tmi.twitch.tv 353"))
-                {
-                    string[] tempUsers;
-                    tempUsers = LineFromReader.Split(' ');
-                    for (int i = 5; i < tempUsers.Length; i++)
-                    {
-                        string temp;
-                        if (tempUsers[i].Contains(":"))
-                        {
-                            temp = tempUsers[i].Substring(1);
-                        }
-                        else
-                        {
-                            temp = tempUsers[i];
-                        }
-                        userList.Add(temp);
-                    }
-                    updateUserList();
-                }
-                else if ((LineFromReader.ToLower().Contains("mode ")) && (LineFromReader.ToLower().Contains(" +o")))
-                {
-                    string[] tempMods;
-                    tempMods = LineFromReader.Split(' ');
-                    string tempMod = tempMods[tempMods.Length - 1];
-                    userList.Add(tempMod);
-                    userList.AddMod(tempMod);
-                    updateUserList();
-                }
-                else if (LineFromReader.Contains("PART"))
-                {
-                    var tempUsername = LineFromReader.Split('!')[0];
-                    tempUsername = tempUsername.Substring(1);
-                    userList.Remove(tempUsername);
-                    if(ShowJoinPart == true)
-                        PostText("-Parts- " + tempUsername, JoinPartColor);
-                    updateUserList();
-                }
-                else if (LineFromReader.Contains("JOIN"))
-                {
-                    var tempUsername = LineFromReader.Split('!')[0];
-                    tempUsername = tempUsername.Substring(1);
-                    userList.Add(tempUsername);
-                    if (ShowJoinPart == true)
-                        PostText("-Joins- " + tempUsername, JoinPartColor);
-                    updateUserList();
-                }
-                else
-                {
-                    //chat_area.AppendText(LineFromReader + "\r\n");
-                    //textInput(LineFromReader);
-                }
-                IsLineRead = true;
-            }
-        }
 
         private void ClearText(string text)
         {
@@ -545,7 +462,7 @@ namespace TwitchIrcChat
         {
             try
             {
-                words = LineFromReader.Split(chatSeperator, 4);
+                words = LineFromReader.Split(ChatSeperator, 4);
                 ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
                 //FormatedMessage = words[3].TrimStart(':');
                 FormatedMessage = words[3].Remove(0, 1);
@@ -569,7 +486,7 @@ namespace TwitchIrcChat
 
         private void PingHandler()
         {
-            words = LineFromReader.Split(chatSeperator);
+            words = LineFromReader.Split(ChatSeperator);
             if (words[0] == "PING")
             {
                 DataSend("PONG", words[1]);
@@ -586,9 +503,6 @@ namespace TwitchIrcChat
                     if (IsLineRead && reader != null)
                     {
                         LineFromReader = reader.ReadLine();
-                        //Console.WriteLine(LineFromReader);
-                        if (LineFromReader.Contains("butts"))
-                            throw new Exception();
                         if (LineFromReader != null)
                         {
                             IsLineRead = false;
@@ -620,41 +534,40 @@ namespace TwitchIrcChat
 
         #endregion
 
-        private void Join()
+        private void Join(string channel)
         {
-            if (text_pass.Password.Contains("oauth"))
+            if (isOnline)
             {
-
-                Nick = text_user.Text.ToLower();
-                Password = text_pass.Password.ToString();
-                Channel = "#" + text_chan.Text.ToString();
-                if (Nick.Length > 1 && Password.Length > 1 && Channel.Length > 1)
+                if (!channel.StartsWith("#"))
+                    channel = "#" + channel;
+                if (Tabs.Where(x => x.Channel == channel).Count() == 0)
                 {
-                    Connect();
-                    DataSend("jtvclient", null);
-                    isOnline = true;
-                    isDisconnected = false;
-                }
-                Timer.Start();
-                if (RememberMe.IsChecked == true)
-                {
-                    isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
-                    using (StreamWriter srWriter = new StreamWriter(new IsolatedStorageFileStream(isoFile, FileMode.OpenOrCreate, isolatedStorage)))
-                    {
-                        srWriter.WriteLine(Nick);
-                        srWriter.WriteLine(Channel);
-                        srWriter.WriteLine(Password);
-                    }
+                    var index = Tabs.Count() + 1;
+                    var newTab = new TabWindow(channel, this, index);
+                    TabControl.Items.Add(newTab);
+                    Tabs.Add(newTab);
+                    TabControl.SelectedIndex = index;
                 }
             }
-            else
+        }
+
+        private void Part()
+        {
+            if (CurrentTab > 0)
             {
-                if (MessageBox.Show("You need to generate an oauth twitch password at http://twitchapps.com/tmi/",
-                    "Oauth Password Error",
-                    MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                var currentTab = TabControl.SelectedIndex - 1;
+                Tabs[currentTab].Part();
+                TabControl.Items.Remove(Tabs[currentTab]);
+                var newTab = TabControl.SelectedIndex;
+                if (newTab == 0)
                 {
-                    Process.Start("http://twitchapps.com/tmi/");
+                    UpdateSelected(EmptyUserList);
                 }
+                else
+                {
+                    UpdateSelected(Tabs[newTab - 1].UserList, TabIndex);
+                }
+                Tabs.RemoveAt(currentTab);
             }
         }
 
@@ -662,7 +575,7 @@ namespace TwitchIrcChat
 
         private void button_join_Click(object sender, RoutedEventArgs e)
         {
-            Join();
+            Join(text_chan.Text);
         }
 
         private void button_part_Click(object sender, RoutedEventArgs e)
@@ -670,27 +583,9 @@ namespace TwitchIrcChat
             Part();
         }
 
-        private void Part()
+        private void button_connect_Click(object sender, RoutedEventArgs e)
         {
-            if (isOnline || isDisconnected)
-            {
-                if (isDisconnected)
-                {
-                    PostText("Disconnected from server", JoinPartColor);
-                }
-                isOnline = false;
-                IsLineRead = false;
-                DataSend("PART", Channel);
-                userList.Clear();
-                Text_UserList.Document.Blocks.Clear();
-                ReadStreamThread.Abort();
-                Timer.Stop();
-                writer.Flush();
-                writer.Close();
-                reader.Close();
-                writer = null;
-                reader = null;
-            }
+            Connect();
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -698,17 +593,33 @@ namespace TwitchIrcChat
             Console.WriteLine("stuff");
             if (e.Key == Key.Enter && isOnline)
             {
-                if (!string.IsNullOrWhiteSpace(textBox1.Text))
+                var input = textBox1.Text;
+                if (!string.IsNullOrWhiteSpace(input))
                 {
-                    SendMessage(textBox1.Text);
+                    if (input.ToLower().StartsWith(@"/join"))
+                    {
+                        var temp = input.Split(' ');
+                        if (temp.Count() == 2)
+                        {
+                            Join(temp[1]);
+                        }
+                    }
+                    else if (input.ToLower().StartsWith(@"/part") && CurrentTab > 0)
+                    {
+                        Part();
+                    }
+                    else
+                    {
+                        Tabs[TabControl.SelectedIndex - 1].SendMessage(input);
+                    }
                     if (IsCurrent && Current != "")
                         Up.Push(Current);
                     MoveDownToUp();
                     IsCurrent = false;
                     Up.Push(textBox1.Text);
                     KeepStackUnderMax();
-                    textBox1.Clear();
                 }
+                textBox1.Clear();
             }
             if (e.Key == Key.Up)
             {
@@ -783,7 +694,15 @@ namespace TwitchIrcChat
 
         private void Button_Clear_Click(object sender, RoutedEventArgs e)
         {
-            chat_area.Document.Blocks.Clear();
+            var current = TabControl.SelectedIndex;
+            if (current == 0)
+            {
+                ServerChatArea.Document.Blocks.Clear();
+            }
+            else
+            {
+                Tabs[current - 1].Clear();
+            }
         }
 
 
@@ -799,20 +718,17 @@ namespace TwitchIrcChat
         {
             Settings.Default.MainWIndowPlacement = this.GetPlacement();
             Settings.Default.Save();
-            Part();
+            Tabs.ForEach(x => x.Part());
             Application.Current.Shutdown();
         }
 
 
-        private void Window_KeyUpJoin(object sender, KeyEventArgs e)
+        public void OnServerTabSelected(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Enter && !isOnline)
-            {
-                Join();
-            }
+            UpdateSelected(EmptyUserList);
         }
 
-        private void UserClick(object sender, RoutedEventArgs e)
+        public void UserClick(object sender, RoutedEventArgs e)
         {
             //temp.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
             var inLines = ((Paragraph)sender).Inlines;
@@ -958,6 +874,7 @@ namespace TwitchIrcChat
                 this.Topmost = false;
             }
         }
+
 
     }
 }

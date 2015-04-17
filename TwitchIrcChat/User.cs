@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace TwitchIrcChat
 {
-    class User
+    public class User
     {
         static Random random = new Random();
         public string UserName { get; set; }
@@ -69,7 +69,7 @@ namespace TwitchIrcChat
         }
     }
 
-    class UserList
+    public class UserList
     {
         public List<User> userList { get; set; }
 

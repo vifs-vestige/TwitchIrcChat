@@ -6,7 +6,7 @@ using System.IO;
 
 namespace TwitchIrcChat
 {
-    class Emotes
+    public class Emotes
     {
         public Dictionary<string, string> EmoteList { get; set; }
 
