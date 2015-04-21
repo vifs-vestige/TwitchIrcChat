@@ -48,7 +48,7 @@ namespace TwitchIrcChat
             this.Rtb.Document.Blocks.Clear();
         }
 
-        public TabWindow(string channel, MainWindow mainWindow, int index)
+        public TabWindow(string channel, MainWindow mainWindow, int index, SolidColorBrush background)
         {
             Index = index;
             UserList = new UserList();
@@ -59,6 +59,9 @@ namespace TwitchIrcChat
             Main = mainWindow;
             Rtb.Background = Brushes.Black;
             Rtb.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            Rtb.IsReadOnly = true;
+            Rtb.IsDocumentEnabled = true;
+            Rtb.Background = background;
             this.AddChild(Rtb);
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromMilliseconds(200);
@@ -70,6 +73,11 @@ namespace TwitchIrcChat
         public void SetIndex(int index)
         {
             this.TabIndex = index;
+        }
+
+        public void UpdateColor(SolidColorBrush background)
+        {
+            Rtb.Background = background;
         }
 
         protected override void OnSelected(RoutedEventArgs e)
@@ -222,6 +230,7 @@ namespace TwitchIrcChat
         {
             var emoteImgSrc = Main.EmoteList.EmoteList[text];
             BitmapImage bitmap = new BitmapImage(new Uri(@"/Emotes/" + emoteImgSrc, UriKind.RelativeOrAbsolute));
+            Console.WriteLine(bitmap.UriSource);
             Image image = new Image();
             image.Source = bitmap;
             image.Width = 30;

@@ -96,6 +96,7 @@ namespace TwitchIrcChat
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
             isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+            Tabs = new List<TabWindow>();
             if (isolatedStorage.FileExists(isoFile))
             {
                 RememberMe.IsChecked = true;
@@ -107,7 +108,6 @@ namespace TwitchIrcChat
                 }
             }
             LoadDefaults();
-            Tabs = new List<TabWindow>();
         }
 
         private void LoadDefaults()
@@ -130,7 +130,12 @@ namespace TwitchIrcChat
 
         private void ApplySettings()
         {
-            chat_area.Background = BackgroundChatColor;
+            //chat_area.Background = BackgroundChatColor;
+            ServerChatArea.Background = BackgroundChatColor;
+            foreach (var item in Tabs)
+            {
+                item.UpdateColor(BackgroundChatColor);
+            }
             Text_UserList.Background = BackgroundUserColor;
             Text_UserList.Foreground = UserColor;
             textBox1.Background = BackgroundTextBoxColor;
@@ -141,11 +146,11 @@ namespace TwitchIrcChat
 
         private void SendMessage(string message)
         {
-            if (message.StartsWith(@"/"))
-                DataSend(message.Replace(@"/", ""), null);
-            else
-                DataSend("PRIVMSG ", Channel + " :" + message);
-            textInput(message, Nick);
+            if (CurrentTab != 0)
+            {
+                Tabs[CurrentTab-1].SendMessage(message);
+            }
+
         }
 
         private void Connect()
@@ -187,35 +192,12 @@ namespace TwitchIrcChat
 
         #region chat methods
 
-        private Image AddImageToPara(string text)
-        {
-            var emoteImgSrc = EmoteList.EmoteList[text];
-            BitmapImage bitmap = new BitmapImage(new Uri(@"/Emotes/" + emoteImgSrc, UriKind.RelativeOrAbsolute));
-            Image image = new Image();
-            image.Source = bitmap;
-            image.Width = 30;
-            image_test.Source = bitmap;
 
-            return image;
-        }
-
-
-        public void textInput(string text, string user = "")
+        public void textInput(string text)
         {
             var emoteList = EmoteList.CheckTextForEmotes(text);
             Paragraph para = new Paragraph();
             para.LineHeight = 1;
-            if (user.Length > 1)
-            {
-                TextRange end = new TextRange(para.ContentStart, para.ContentStart);
-                end.Text = ">";
-                TextRange tr = new TextRange(para.ContentStart, para.ContentStart);
-                tr.Text = user;
-                tr.ApplyPropertyValue(TextElement.ForegroundProperty, userList.getColor(user));
-                TextRange start = new TextRange(para.ContentStart, para.ContentStart);
-                start.Text = "<";
-                start.ApplyPropertyValue(TextElement.ForegroundProperty, TextColor);
-            }
             TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
             var tempDate = DateTime.Now;
             if (DateFormat != "")
@@ -226,169 +208,13 @@ namespace TwitchIrcChat
                 }
                 catch (Exception) { }
             }
-            para = addImageAndHyperLinks(text, para);
-            if (user != "" && user != "jtv")
-            {
-                ContextMenuUser = user;
-                para.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
-            }
             para.Foreground = TextColor;
-            EveryInput.Add(para, user);
-            //chat_area.Document.Blocks.Add(para);
-            //chat_area.ScrollToEnd();
+            para.Inlines.Add(text);
+            EveryInput.Add(para, "");
             ServerChatArea.Document.Blocks.Add(para);
             ServerChatArea.ScrollToEnd();
         }
-
-        private bool checkSpaces(string input, int start, int end)
-        {
-            var isValid = true;
-            if (start != 0)
-            {
-                if (input[start - 1] != ' ')
-                {
-                    isValid = false;
-                }
-            }
-            if (end != input.Length)
-            {
-                if (input[end] != ' ')
-                {
-                    isValid = false;
-                }
-            }
-            return isValid;
-            
-        }
-
-        private Paragraph addImageAndHyperLinks(string input, Paragraph para)
-        {
-
-            var emoteList = EmoteList.CheckTextForEmotes(input);
-            emoteList.Add(RegexHyperLink);
-            var paraItems = new List<ParaInfo>();
-            foreach (var item in emoteList)
-            {
-                var newItem = item;
-                Regex r;
-                if (item != RegexHyperLink)
-                {
-                    newItem = newItem.Replace("\\", "\\\\").Replace(")", "\\)").Replace("(", "\\(");
-                    r = new Regex(newItem);
-                }
-                else
-                {
-                     r = new Regex(newItem, RegexOptions.IgnoreCase);
-                }
-                var matches = r.Matches(input);
-                for (int i = 0; i < matches.Count; i++)
-                {
-                    var tempInfo = new ParaInfo();
-                    tempInfo.start = matches[i].Index;
-                    tempInfo.end = matches[i].Length + tempInfo.start;
-                    if (checkSpaces(input, tempInfo.start, tempInfo.end))
-                    {
-                        tempInfo.item = item;
-                        if (item == RegexHyperLink)
-                        {
-                            tempInfo.item = matches[i].Value;
-                            tempInfo.isHyper = true;
-                        }
-                        paraItems.Add(tempInfo);
-                    }
-                }
-            }
-            //var itemsCount = 0;
-            //foreach (var item in input.Split(' '))
-            //{
-            //    //var temp = item;
-            //    //if (!item.StartsWith("http"))
-            //    //    temp = "http://" + item;
-            //    //if (temp.IsValidUrl())
-            //    //if(Uri.IsWellFormedUriString(item, UriKind.Relative))
-            //        Uri uri;
-    
-            //    if(Uri.TryCreate(item, UriKind.Absolute, out uri)
-            //        && (uri.Scheme == Uri.UriSchemeHttp
-            //        || uri.Scheme == Uri.UriSchemeHttps))
-            //    {
-            //        var tempInfo = new ParaInfo();
-            //        tempInfo.start = itemsCount;
-            //        tempInfo.end = item.Length + tempInfo.start;
-            //        tempInfo.item = item;
-            //        tempInfo.isHyper = true;
-            //        paraItems.Add(tempInfo);
-            //    }
-            //    itemsCount += item.Length + 1;
-            //}
-            int tracker = 0;
-            foreach (var item in paraItems.OrderBy(x => x.start))
-            {
-                para.Inlines.Add(input.Substring(tracker, item.start - tracker));
-                if (item.isHyper)
-                {
-                    para.Inlines.Add(addHyperLink(item.item));
-                }
-                else
-                {
-                    para.Inlines.Add(AddImageToPara(item.item));
-                }
-                tracker = item.end;
-            }
-            //if (paraItems.Count == 0)
-            //{
-            //    para.Inlines.Add(input);
-            //}
-            para.Inlines.Add(input.Substring(tracker, input.Length - tracker));
-            return para;
-        }
-
-        private Inline addHyperLink(string text)
-        {
-            Inline stuff;
-            Hyperlink link = new Hyperlink(new Run(text));
-            stuff = link;
-            try
-            {
-                link.NavigateUri = new Uri(text);
-            }
-            catch (UriFormatException e)
-            {
-                try
-                {
-                    link.NavigateUri = new Uri("http://" + text);
-                }
-                catch
-                {
-                    stuff = new Run(text);
-                }
-            }
-            link.RequestNavigate += (sender, e) =>
-            {
-                Process.Start(e.Uri.ToString());
-            };
-            return stuff;
-        }
-
-        public void displayImage(string img)
-        {
-            BitmapImage bitmap = new BitmapImage(new Uri(@"/Emotes/" + img + ".png", UriKind.RelativeOrAbsolute));
-            Image image = new Image();
-            image.Source = bitmap;
-            image.Width = 25;
-            image_test.Source = bitmap;
-            chat_area.ScrollToEnd();
-            chat_area.AllowDrop = true;
-        }
-
-        private void parseColor(string input)
-        {
-            var temp = input.Split(' ');
-            var user = temp[4];
-            var color = temp.Last();
-            userList.setColor(user, color);
-        }
-
+        
         private void updateUserList()
         {
             Text_UserList.Document.Blocks.Clear();
@@ -411,72 +237,6 @@ namespace TwitchIrcChat
                 temp.Inlines.Add(item);
                 temp.ContextMenuOpening += new ContextMenuEventHandler(UserClick);
                 Text_UserList.Document.Blocks.Add(temp);
-            }
-        }
-
-
-        private void ClearText(string text)
-        {
-            var user = text.Split(' ')[4];
-            //var ok = chat_area.Document.Blocks.
-            var tempList = new List<Paragraph>();
-            foreach (var item in EveryInput.Where(s => s.Value == user))
-            {
-                tempList.Add(item.Key);
-                chat_area.Document.Blocks.Remove(item.Key);
-            }
-            foreach (var item in tempList)
-            {
-                EveryInput.Remove(item);
-            }
-        }
-
-        private void PostText(string text, SolidColorBrush color)
-        {
-            Paragraph para = new Paragraph();
-
-            para.Inlines.Add(text);
-
-
-            TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
-            var tempDate = DateTime.Now;
-            if (DateFormat != "")
-            {
-                try
-                {
-                    timeStamp.Text = tempDate.ToString(DateFormat);
-                }
-                catch (Exception) { }
-            }
-
-
-            TextRange tr = new TextRange(para.ContentStart, para.ContentEnd);
-            tr.ApplyPropertyValue(TextElement.ForegroundProperty, color);
-            //tr.Text = text;
-            para.LineHeight = 1;
-            chat_area.Document.Blocks.Add(para);
-            chat_area.ScrollToEnd();
-        }
-
-        private void WordSplitter()
-        {
-            try
-            {
-                words = LineFromReader.Split(ChatSeperator, 4);
-                ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
-                //FormatedMessage = words[3].TrimStart(':');
-                FormatedMessage = words[3].Remove(0, 1);
-                //chat_area.AppendText("<" + replyingUser + "> " + formatedMessage + "\r\n");
-                textInput(FormatedMessage, ReplyingUser);
-                if (FlashOnText && !KeepOnTop)
-                    this.FlashWindow();
-                else if (FormatedMessage.ToLower().Contains(Nick) && FlashOnUser && !KeepOnTop)
-                    this.FlashWindow();
-                //KeywordDetector();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("hello");
             }
         }
 
@@ -543,7 +303,7 @@ namespace TwitchIrcChat
                 if (Tabs.Where(x => x.Channel == channel).Count() == 0)
                 {
                     var index = Tabs.Count() + 1;
-                    var newTab = new TabWindow(channel, this, index);
+                    var newTab = new TabWindow(channel, this, index, BackgroundChatColor);
                     TabControl.Items.Add(newTab);
                     Tabs.Add(newTab);
                     TabControl.SelectedIndex = index;
