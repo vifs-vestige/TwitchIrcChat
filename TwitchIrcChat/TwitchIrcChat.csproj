@@ -155,94 +155,251 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Emotes\smile.png" />
+    <Content Include="Emotes\smile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Emotes\wink.png" />
+    <Content Include="Emotes\wink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Emotes\EmoteOutputs.txt" />
+    <Content Include="Emotes\EmoteOutputs.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Emotes\anger.png" />
-    <Resource Include="Emotes\ArsonNoSexy.png" />
-    <Resource Include="Emotes\AsianGlow.png" />
-    <Resource Include="Emotes\BCWarror.png" />
-    <Resource Include="Emotes\BibleThump.png" />
-    <Resource Include="Emotes\BionicBunion.png" />
-    <Resource Include="Emotes\BlargNaut.png" />
-    <Resource Include="Emotes\BloodTrail.png" />
-    <Resource Include="Emotes\bored.png" />
-    <Resource Include="Emotes\BORT.png" />
-    <Resource Include="Emotes\BrainSlug.png" />
-    <Resource Include="Emotes\BrokeBack.png" />
-    <Resource Include="Emotes\cool.png" />
-    <Resource Include="Emotes\CougarHunt.png" />
-    <Resource Include="Emotes\DansGame.png" />
-    <Resource Include="Emotes\DatSheffy.png" />
-    <Resource Include="Emotes\DBStyle.png" />
-    <Resource Include="Emotes\EagleEye.png" />
-    <Resource Include="Emotes\EvilFetus.png" />
-    <Resource Include="Emotes\eyes.png" />
-    <Resource Include="Emotes\FPSMarksman.png" />
-    <Resource Include="Emotes\FrankerZ.png" />
-    <Resource Include="Emotes\FreakinStinkin.png" />
-    <Resource Include="Emotes\frown.png" />
-    <Resource Include="Emotes\FUNgineer.png" />
-    <Resource Include="Emotes\FuzzyOtterOO.png" />
-    <Resource Include="Emotes\GingerPower.png" />
-    <Resource Include="Emotes\HassanChop.png" />
-    <Resource Include="Emotes\heart.png" />
-    <Resource Include="Emotes\ItsBoshyTime.png" />
-    <Resource Include="Emotes\Jebaited.png" />
-    <Resource Include="Emotes\JKanStyle.png" />
-    <Resource Include="Emotes\JonCarnage.png" />
-    <Resource Include="Emotes\Kappa.png" />
-    <Resource Include="Emotes\KevinTurtle.png" />
-    <Resource Include="Emotes\Kreygasm.png" />
-    <Resource Include="Emotes\MrDestructoid.png" />
-    <Resource Include="Emotes\MVGame.png" />
-    <Resource Include="Emotes\NinjaTroll.png" />
-    <Resource Include="Emotes\NoNoSpot.png" />
-    <Resource Include="Emotes\OMGScoots.png" />
-    <Resource Include="Emotes\OneHand.png" />
-    <Resource Include="Emotes\OptimizePrime.png" />
-    <Resource Include="Emotes\PazPazowitz.png" />
-    <Resource Include="Emotes\PicoMause.png" />
-    <Resource Include="Emotes\PJSalt.png" />
-    <Resource Include="Emotes\PMSTwin.png" />
-    <Resource Include="Emotes\PogChamp.png" />
-    <Resource Include="Emotes\PunchTrees.png" />
-    <Resource Include="Emotes\R.png" />
-    <Resource Include="Emotes\RedCoat.png" />
-    <Resource Include="Emotes\ResidentSleeper.png" />
-    <Resource Include="Emotes\ShazBotstix.png" />
-    <Resource Include="Emotes\slant.png" />
-    <Resource Include="Emotes\SMOrc.png" />
-    <Resource Include="Emotes\SMSkull.png" />
-    <Resource Include="Emotes\SoBayed.png" />
-    <Resource Include="Emotes\SSSsss.png" />
-    <Resource Include="Emotes\StoneLightning.png" />
-    <Resource Include="Emotes\StrawBeary.png" />
-    <Resource Include="Emotes\SuperVinlin.png" />
-    <Resource Include="Emotes\surprised.png" />
-    <Resource Include="Emotes\SwiftRage.png" />
-    <Resource Include="Emotes\TehFunrun.png" />
-    <Resource Include="Emotes\TheRinger.png" />
-    <Resource Include="Emotes\TheTarFu.png" />
-    <Resource Include="Emotes\TinyFace.png" />
-    <Resource Include="Emotes\tongue.png" />
-    <Resource Include="Emotes\tonguewink.png" />
-    <Resource Include="Emotes\TriHard.png" />
-    <Resource Include="Emotes\UleetBackup.png" />
-    <Resource Include="Emotes\UnSane.png" />
-    <Resource Include="Emotes\vhappy.png" />
-    <Resource Include="Emotes\Volcania.png" />
-    <Resource Include="Emotes\WinWaker.png" />
+    <Content Include="Emotes\anger.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\ArsonNoSexy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\AsianGlow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BCWarror.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BibleThump.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BionicBunion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BlargNaut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BloodTrail.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\bored.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BORT.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BrainSlug.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\BrokeBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\cool.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\CougarHunt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\DansGame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\DatSheffy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\DBStyle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\EagleEye.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\EvilFetus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\eyes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\FPSMarksman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\FrankerZ.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\FreakinStinkin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\frown.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\FUNgineer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\FuzzyOtterOO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\GingerPower.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\HassanChop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\ItsBoshyTime.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\Jebaited.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\JKanStyle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\JonCarnage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\Kappa.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\KevinTurtle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\Kreygasm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\MrDestructoid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\MVGame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\NinjaTroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\NoNoSpot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\OMGScoots.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\OneHand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\OptimizePrime.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PazPazowitz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PicoMause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PJSalt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PMSTwin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PogChamp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\PunchTrees.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\R.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\RedCoat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\ResidentSleeper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\ShazBotstix.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\slant.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SMOrc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SMSkull.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SoBayed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SSSsss.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\StoneLightning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\StrawBeary.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SuperVinlin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\surprised.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\SwiftRage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\TehFunrun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\TheRinger.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\TheTarFu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\TinyFace.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\tongue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\tonguewink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\TriHard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\UleetBackup.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\UnSane.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\vhappy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\Volcania.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emotes\WinWaker.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -273,9 +430,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Test\butts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

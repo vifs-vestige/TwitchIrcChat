@@ -8,14 +8,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="TwitchIrcChat.exe.manifest" size="14494">
+    <dependentAssembly dependencyType="install" codebase="TwitchIrcChat.exe.manifest" size="14877">
       <assemblyIdentity name="TwitchIrcChat.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>762nWAID9F6qOrZ4iHejJtv+Diw=</dsig:DigestValue>
+        <dsig:DigestValue>wJJJOI34YwNZ7Ud1Y4e1Occl71E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

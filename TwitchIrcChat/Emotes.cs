@@ -18,11 +18,16 @@ namespace TwitchIrcChat
 
         private void ReadIn()
         {
+            
             var ok = Properties.Resources.EmoteOutputs.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+            ok = File.ReadAllText(@"Emotes\EmoteOutputs.txt").Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
             foreach (var item in ok)
             {
                 var splits = item.Split(' ');
-                EmoteList.Add(splits[1], splits[0]);
+                if (File.Exists(@"Emotes\" + splits[0]))
+                {
+                    EmoteList.Add(splits[1], splits[0]);
+                }
             }
             
         }

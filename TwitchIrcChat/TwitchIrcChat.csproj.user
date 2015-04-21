@@ -15,7 +15,6 @@
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
   <PropertyGroup>
-    <ReferencePath>
-    </ReferencePath>
+    <ReferencePath>C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\Emotes\</ReferencePath>
   </PropertyGroup>
 </Project>

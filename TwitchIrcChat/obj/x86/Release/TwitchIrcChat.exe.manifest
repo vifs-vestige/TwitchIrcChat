@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="377344">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="223744">
       <assemblyIdentity name="TwitchIrcChat" version="1.0.0.8" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>+l4g1fdtga4AztPfDFB6rfBVhmg=</dsig:DigestValue>
+        <dsig:DigestValue>M5c0DU3Yqm4qMlclnxWQorooHP4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -245,6 +245,708 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="Emotes\anger.png" size="1159">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>fl2LCkuUMXFgxKEr1YcT+q2Q/I0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\ArsonNoSexy.png" size="1772">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>RYN8LnE/+OFnYPSHLWzyzCFuaoA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\AsianGlow.png" size="2380">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ujK+sGs0diUm/ILlyvFTFIFJe7A=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BCWarror.png" size="1758">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>feyy/JSW11oSNU+OPYskowLVzIA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BibleThump.png" size="2305">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>nJF1L+pX5Q9/HNmqTIhs9WR93n4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BionicBunion.png" size="2018">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>GiJNqFYkbanExo3ZWBOvzJ5tpX8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BlargNaut.png" size="1804">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>dFIHS4COQDolAC0bnSiQoMUW2d4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BloodTrail.png" size="2496">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tFlBLCNQiH0AonpLT/0zNYSUlmU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\bored.png" size="1062">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>+hMS6g0wg+MMnm1nZL4ic7ECduQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BORT.png" size="2499">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>idIr6yhTwxVEJhC459af91xP9bc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BrainSlug.png" size="1700">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Njd0kE5Q5SCD4rJopDvSk3errgk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\BrokeBack.png" size="1425">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>/moNW66md6rNCdTX2tnzuq3YzoM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\cool.png" size="1350">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>0Y64X2jv2WNw+vzgXnK8+nkAHCg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\CougarHunt.png" size="1515">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tuyGLqExWPlmV4iUydHKFzmSh8g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\DansGame.png" size="1785">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>LWrzCFQlTes00D/aflFqV77Pv48=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\DatSheffy.png" size="4907">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>OgUfArkjz/yNzZWE+dRuLAvlA4U=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\DBStyle.png" size="2131">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>2E1ElWCwrssj8eNwgZ3xsRm5im0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\EagleEye.png" size="1198">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>U4RnmWACEgIKSsZgPgzxLzpOOgY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\EmoteOutputs.txt" size="1790">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>xFu2UflWCjh9ecjeSQB13z9oKVU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\EvilFetus.png" size="1971">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>c9ttB+JbejhA8xkTYIJXnVCUQFQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\eyes.png" size="1109">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>gVVnBLDTsRFT1Mt/p94XVbLZw1U=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\FPSMarksman.png" size="1735">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>nG+izFxkCnJmaKkGmcQbJjTO480=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\FrankerZ.png" size="3198">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>n//Y3Y0UCJMSc73hMX0iONclz5c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\FreakinStinkin.png" size="1749">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6E0XRXQMpQeSoTplNQAq954L/bA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\frown.png" size="1216">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6qFN6wjCv7FjK93tiYPbGQl2RRs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\FUNgineer.png" size="2791">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>2SZZa3i05K8PNCIuMpDLbM9HEDc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\FuzzyOtterOO.png" size="2926">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>lhYw9l44opIrC1Ft3lBkADR5I9g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\GingerPower.png" size="1819">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>PXWrm9WfZ6qosEevx9dK999EjLg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\HassanChop.png" size="1877">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>z4xhGUCE3cTcLIsUgxA6gBzSLtg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\heart.png" size="1259">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>1dXzShFY/TvNR2rsoPhAY5gYSaI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\ItsBoshyTime.png" size="3053">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tzIw5yx1U2tflPm2CocMHZZG9Kg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\Jebaited.png" size="4614">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>cf4oLDbTEXZf1kZyUzMSSFQYKVc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\JKanStyle.png" size="1213">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>K3aeVTPsBLkzEKzsJD1tqP7B0c0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\JonCarnage.png" size="1471">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>XRQlIZGllsax+nFgtPX7aezP4uY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\Kappa.png" size="1581">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>e3AUu53GIy1Lmr6326CiP1J953s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\KevinTurtle.png" size="1905">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Cib6RDq2IIBruhFaiEsEZmAT4Ag=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\Kreygasm.png" size="1746">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>xUbv1a1M9+Jb2+PmE/i1koAdqXk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\MrDestructoid.png" size="2091">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>kw+2HvMavf0P8lDoPC2YlGNblIk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\MVGame.png" size="2314">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>xK+Y9MlXE+yvu05yXExq7qIs1Ag=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\NinjaTroll.png" size="1734">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>D+Y7uejhZO3Q1xH2feuEQ3l8fww=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\NoNoSpot.png" size="1989">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>jQ0uO58NgPj65tacBlfly0VuUuE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\OMGScoots.png" size="2795">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>m2fFBuVCZgQ0A5g3GZM0rc92XUY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\OneHand.png" size="1394">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>uUgAKWJcP8IHgP0k8WeIUSzV/+Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\OptimizePrime.png" size="1239">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>EsBQhR2KM5dzT4OmprT5Q7dNb0Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PazPazowitz.png" size="1146">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tYUs3YkUMTrl+LkBeO0eHtebLzk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PicoMause.png" size="1545">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>4DapZDmIXfYi/M1rzRCgWo4adws=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PJSalt.png" size="1789">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>mhvau8hB0r3k8krDNkq8MrOfFLc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PMSTwin.png" size="2375">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>1phdxTyIl+4eKhRNVjZsljPLUm8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PogChamp.png" size="4796">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>EUrulsYzzRGYTMQMKZmfoO+kHS4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\PunchTrees.png" size="411">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>EUDVP03n/iOAWHNlF99+XbNwvMY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\R.png" size="1447">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>MedB3GBZzirvdYGVVSm6y6qjHOw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\RedCoat.png" size="1486">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>WWUlolWhv9/nKc3AaYTq3iRdAgA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\ResidentSleeper.png" size="2956">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>BgVMDpsnu3B0sUzvh9+GB1i1hzc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\ShazBotstix.png" size="4850">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>vGRZXS93Xb8cKHLLfJBLFQ+ONh4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\slant.png" size="1171">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>yXAddKYKErRijg3YEgdYMVHuNeI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\smile.png" size="1194">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>AfxQeSy+AI3HHztiXZkAYNEsn3Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SMOrc.png" size="2872">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>UJ0TRpmFgDqEJu/UFFtin3/JAzQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SMSkull.png" size="1702">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>coEY1MzNrU9n4t1J1IdfjTZzCFU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SoBayed.png" size="1527">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>V3D+bEJtWIJV1paLQ+q8yWprdi0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SSSsss.png" size="457">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZXY+o87hPcrtkMGWkNqqVeRAOgo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\StoneLightning.png" size="1233">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>RoVoSJBNHmjNYxurweBpPuXROJ8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\StrawBeary.png" size="1519">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>pVRLP7Q2989Fo3iete1Cjiv7u1A=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SuperVinlin.png" size="1957">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6V4QlpNDWnjMXUCfLSb+Lk0kBTI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\surprised.png" size="1182">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>9iYarm6BsgXrAHnHaIReGpMeLCg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\SwiftRage.png" size="1852">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZKPXAfWV++amDjP8E97QrnNhbyE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\TehFunrun.png" size="1591">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>1A4KpCUNAaPktSf1lZ/TLCHzN/A=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\TheRinger.png" size="1251">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Aenw4KIqVC1oyeRvrqO0El5B8LQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\TheTarFu.png" size="2243">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>iZsuZBozYnV12XoPiqd2elyzob8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\TinyFace.png" size="1922">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>jDc3Xgj99F7QffHLui7cydzfwcY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\tongue.png" size="1195">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>OgZGc6BBGAXbDkPBQ7rY/YprYuk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\tonguewink.png" size="1220">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>duRzuiaLbroovUJo8+tmwWfyybc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\TriHard.png" size="2001">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Tti6rghZMLxQf8WmgXPkr5y7igk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\UleetBackup.png" size="1637">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tf376saZsdP5qad9GHJzhM2bhaI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\UnSane.png" size="2513">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>hrto7eWqITuVxJk/bkFAid5MZLs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\vhappy.png" size="1132">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>rMJ50DJMFTEaYPClIiCj8B5x7xQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\Volcania.png" size="4480">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Vr6o01pt8ZhzpuTIe756ANmgZMI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\wink.png" size="1217">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>0bQGY4C97azd5xUqyoYObKH+05g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Emotes\WinWaker.png" size="2283">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>um2gMU4KEhDMDx7Wg2o4oWT0yLM=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="TwitchIrcChat.exe.config" size="2455">
     <hash>
       <dsig:Transforms>
