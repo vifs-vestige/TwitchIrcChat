@@ -48,7 +48,7 @@ namespace TwitchIrcChat
         Dictionary<Paragraph, String> EveryInput;
         IsolatedStorageFile isolatedStorage;
         string isoFile = "isoFile";
-        public const string RegexHyperLink = @"(http(s?):\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,15}(:[0-9]{1,5})?(\/.*)?";
+        public const string RegexHyperLink = @"((http|ftp|https):\/\/)?[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
         public string ContextMenuUser = "";
         public string Current = "";
         private bool IsCurrent = false;
@@ -368,7 +368,7 @@ namespace TwitchIrcChat
                     {
                         Part();
                     }
-                    else
+                    else if (CurrentTab > 0)
                     {
                         Tabs[TabControl.SelectedIndex - 1].SendMessage(input);
                     }
