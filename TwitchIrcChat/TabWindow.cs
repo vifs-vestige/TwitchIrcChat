@@ -109,19 +109,35 @@ namespace TwitchIrcChat
 
         private void ParaOutput(string input, string user = "")
         {
+            bool action = false;
+            input = input.TrimStart(' ');
+            if (input.Remove(0,1).StartsWith("ACTION"))
+            {
+                action = true;
+                input = " " + input.Remove(0, 8);
+            }
             var emoteList = Main.EmoteList.CheckTextForEmotes(input);
             Paragraph para = new Paragraph();
             para.LineHeight = 1;
             if (user.Length > 1)
             {
-                TextRange end = new TextRange(para.ContentStart, para.ContentStart);
-                end.Text = ">";
+                if (!action)
+                {
+                    TextRange end = new TextRange(para.ContentStart, para.ContentStart);
+                    end.Text = ">";
+                }
                 TextRange tr = new TextRange(para.ContentStart, para.ContentStart);
-                tr.Text = user;
+                if (UserList.IsMod(user))
+                    tr.Text = "@" + user;
+                else
+                    tr.Text = user;
                 tr.ApplyPropertyValue(TextElement.ForegroundProperty, UserList.getColor(user));
-                TextRange start = new TextRange(para.ContentStart, para.ContentStart);
-                start.Text = "<";
-                start.ApplyPropertyValue(TextElement.ForegroundProperty, Main.TextColor);
+                if (!action)
+                {
+                    TextRange start = new TextRange(para.ContentStart, para.ContentStart);
+                    start.Text = "<";
+                    start.ApplyPropertyValue(TextElement.ForegroundProperty, Main.TextColor);
+                }
             }
             TextRange timeStamp = new TextRange(para.ContentStart, para.ContentStart);
             var tempDate = DateTime.Now;
@@ -130,6 +146,9 @@ namespace TwitchIrcChat
                 try
                 {
                     timeStamp.Text = tempDate.ToString(Main.DateFormat);
+                    if (action)
+                        timeStamp.Text += " ";
+                    timeStamp.ApplyPropertyValue(TextElement.ForegroundProperty, Main.TextColor);
                 }
                 catch (Exception) { }
             }
@@ -139,7 +158,10 @@ namespace TwitchIrcChat
                 Main.ContextMenuUser = user;
                 para.ContextMenuOpening += new ContextMenuEventHandler(Main.UserClick);
             }
-            para.Foreground = Main.TextColor;
+            if (!action)
+                para.Foreground = Main.TextColor;
+            else
+                para.Foreground = UserList.getColor(user);
             EveryInput.Add(para, user);
             Rtb.Document.Blocks.Add(para);
             Rtb.ScrollToEnd();

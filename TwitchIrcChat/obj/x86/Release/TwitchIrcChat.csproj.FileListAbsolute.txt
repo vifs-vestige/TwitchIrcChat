@@ -124,3 +124,4 @@ C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Emotes\U
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Emotes\vhappy.png
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Emotes\Volcania.png
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Emotes\WinWaker.png
+C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.csprojResolveAssemblyReference.cache

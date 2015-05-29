@@ -144,6 +144,19 @@ namespace TwitchIrcChat
             userList.Clear();
         }
 
+        public bool IsMod(string userName)
+        {
+            foreach (var item in userList)
+            {
+                if (item.UserName.Equals(userName))
+                {
+                    if (item.IsMod)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public void AddMod(string userName)
         {
             foreach (var item in userList)

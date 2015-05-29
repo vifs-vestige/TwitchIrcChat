@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="223744">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchIrcChat.exe" size="224256">
       <assemblyIdentity name="TwitchIrcChat" version="1.0.0.8" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>69i1NEAnu2OXLKun+Z0T2G6DNyM=</dsig:DigestValue>
+        <dsig:DigestValue>UWFRcs6LLyvpwjt+6qVK7fqZDSY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
