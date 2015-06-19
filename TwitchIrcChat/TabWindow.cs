@@ -96,9 +96,14 @@ namespace TwitchIrcChat
         {
             try
             {
-                words = input.Split(Main.ChatSeperator, 4);
-                ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
-                FormatedMessage = words[3].Remove(0, 1);
+                words = input.Split(Main.ChatSeperator, 5);
+                //ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
+                ReplyingUser = input.Split(':', '!')[1];
+                if (input.Contains("color=#"))
+                {
+                    UserList.setColor(ReplyingUser, "#" + input.Split(';','#')[1]);
+                }
+                FormatedMessage = words[4].Remove(0, 1);
                 ParaOutput(FormatedMessage, ReplyingUser);
                 if (Main.FlashOnText && !Main.KeepOnTop)
                     Main.FlashWindow();

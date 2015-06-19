@@ -42,6 +42,8 @@ namespace TwitchIrcChat
         private void ChannelMesseage()
         {
             Property = Input.Split(' ')[2];
+            if (Property == "PRIVMSG")
+                Property = Input.Split(' ')[3];
             if (!Property.StartsWith("#"))
                 Property = "#" + Property;
             Type = MesseageType.Channel;

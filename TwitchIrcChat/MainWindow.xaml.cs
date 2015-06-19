@@ -174,6 +174,7 @@ namespace TwitchIrcChat
                         DataSend("NICK", Nick);
                         DataSend("USER", Nick);
                         DataSend("CAP REQ :twitch.tv/membership", null);
+                        DataSend("CAP REQ :twitch.tv/tags", null);
                         //DataSend("jtvclient", null);
                         ReadStreamThread = new Thread(new ThreadStart(ReadIn));
                         ReadStreamThread.Start();
