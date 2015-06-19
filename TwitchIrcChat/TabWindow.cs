@@ -63,11 +63,11 @@ namespace TwitchIrcChat
             Rtb.IsDocumentEnabled = true;
             Rtb.Background = background;
             this.AddChild(Rtb);
-            Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromMilliseconds(200);
-            Timer.Tick += new EventHandler(UpdateText_Tick);
+            //Timer = new DispatcherTimer();
+            //Timer.Interval = TimeSpan.FromMilliseconds(200);
+            //Timer.Tick += new EventHandler(UpdateText_Tick);
             EveryInput = new Dictionary<Paragraph, string>();
-            Join();
+            //Join();
         }
 
         public void SetIndex(int index)
@@ -87,11 +87,16 @@ namespace TwitchIrcChat
             Main.UpdateSelected(UserList, Index);
         }
 
-        private void WordSplitter()
+        public void ServerInput(string input)
+        {
+            UpdateText_Tick(input);
+        }
+
+        private void WordSplitter(string input)
         {
             try
             {
-                words = LineFromReader.Split(Main.ChatSeperator, 4);
+                words = input.Split(Main.ChatSeperator, 4);
                 ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
                 FormatedMessage = words[3].Remove(0, 1);
                 ParaOutput(FormatedMessage, ReplyingUser);
@@ -252,7 +257,7 @@ namespace TwitchIrcChat
         {
             var emoteImgSrc = Main.EmoteList.EmoteList[text];
             BitmapImage bitmap = new BitmapImage(new Uri(@"/Emotes/" + emoteImgSrc, UriKind.RelativeOrAbsolute));
-            Console.WriteLine(bitmap.UriSource);
+            //Console.WriteLine(bitmap.UriSource);
             Image image = new Image();
             image.Source = bitmap;
             image.Width = 30;
@@ -287,38 +292,28 @@ namespace TwitchIrcChat
             return stuff;
         }
 
-        private void UpdateText_Tick(object sender, EventArgs e)
+        private void UpdateText_Tick(string input)
         {
-            if (IsDisconnected)
-            {
-                Part();
-            }
-            if (!IsLineRead && IsOnline)
-            {
-                Console.WriteLine(LineFromReader);
-                if (LineFromReader.Contains("PRIVMSG"))
+                //Console.WriteLine(LineFromReader);
+                if (input.Contains("PRIVMSG"))
                 {
-                    if (LineFromReader.Contains(":USERCOLOR"))
+                    if (input.Contains(":USERCOLOR"))
                     {
-                        ParseColor(LineFromReader);
+                        ParseColor(input);
                     }
-                    else if (LineFromReader.Contains(":CLEAR"))
+                    else if (input.Contains(":CLEAR"))
                     {
-                        ClearText(LineFromReader);
+                        ClearText(input);
                     }
                     else
                     {
-                        WordSplitter();
+                        WordSplitter(input);
                     }
                 }
-                else if (LineFromReader.Contains("PING"))
-                {
-                    PingHandler();
-                }
-                else if (LineFromReader.Contains("tmi.twitch.tv 353"))
+                else if (input.Contains("tmi.twitch.tv 353"))
                 {
                     string[] tempUsers;
-                    tempUsers = LineFromReader.Split(' ');
+                    tempUsers = input.Split(' ');
                     for (int i = 5; i < tempUsers.Length; i++)
                     {
                         string temp;
@@ -334,35 +329,33 @@ namespace TwitchIrcChat
                         UpdateIfSelected();
                     }
                 }
-                else if ((LineFromReader.ToLower().Contains("mode ")) && (LineFromReader.ToLower().Contains(" +o")))
+                else if ((input.ToLower().Contains("mode ")) && (input.ToLower().Contains(" +o")))
                 {
                     string[] tempMods;
-                    tempMods = LineFromReader.Split(' ');
+                    tempMods = input.Split(' ');
                     string tempMod = tempMods[tempMods.Length - 1];
                     UserList.Add(tempMod);
                     UserList.AddMod(tempMod);
                     UpdateIfSelected();
                 }
-                else if (LineFromReader.Contains("PART"))
+                else if (input.Contains("PART"))
                 {
-                    var tempUsername = LineFromReader.Split('!')[0];
+                    var tempUsername = input.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     UserList.Remove(tempUsername);
                     UpdateIfSelected();
                     if (Main.ShowJoinPart == true)
                         PostText("-Parts- " + tempUsername, Main.JoinPartColor);
                 }
-                else if (LineFromReader.Contains("JOIN"))
+                else if (input.Contains("JOIN"))
                 {
-                    var tempUsername = LineFromReader.Split('!')[0];
+                    var tempUsername = input.Split('!')[0];
                     tempUsername = tempUsername.Substring(1);
                     UserList.Add(tempUsername);
                     UpdateIfSelected();
                     if (Main.ShowJoinPart == true)
                         PostText("-Joins- " + tempUsername, Main.JoinPartColor);
                 }
-                IsLineRead = true;
-            }
         }
 
         private void UpdateIfSelected()
@@ -398,9 +391,9 @@ namespace TwitchIrcChat
         public void SendMessage(string message)
         {
             if (message.StartsWith(@"/"))
-                DataSend(message.Replace(@"/", ""), null);
+                Main.DataSend(message.Substring(1), null);
             else
-                DataSend("PRIVMSG ", Channel + " :" + message);
+                Main.DataSend("PRIVMSG ", Channel + " :" + message);
             ParaOutput(message, Main.Nick);
         }
 
@@ -464,6 +457,7 @@ namespace TwitchIrcChat
                 DataSend("PASS", password);
                 DataSend("NICK", nick);
                 DataSend("USER", nick);
+                DataSend("CAP REQ :twitch.tv/membership", null);
                 DataSend("JOIN", Channel);
                 DataSend("jtvclient", null);
                 ReadStreamThread = new Thread(new ThreadStart(this.ReadIn));
@@ -498,12 +492,13 @@ namespace TwitchIrcChat
         {
             while (true && IsOnline)
             {
-                Console.WriteLine("Read in thread running");
+                //Console.WriteLine("Read in thread running");
                 try
                 {
                     if (IsLineRead && reader != null)
                     {
                         LineFromReader = reader.ReadLine();
+                        Console.WriteLine("Direct Output: " + LineFromReader);
                         if (LineFromReader != null)
                         {
                             IsLineRead = false;

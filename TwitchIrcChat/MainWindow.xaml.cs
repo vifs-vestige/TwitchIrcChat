@@ -89,9 +89,9 @@ namespace TwitchIrcChat
             EmoteList = new Emotes();
             image_test.Width = 0;
             Image_test = image_test;
-            //Timer = new DispatcherTimer();
-            //Timer.Interval = TimeSpan.FromMilliseconds(200);
-            //Timer.Tick += new EventHandler(UpdateText_Tick);
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromMilliseconds(200);
+            Timer.Tick += new EventHandler(UpdateText_Tick);
             //Timer.Start();
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
@@ -146,10 +146,10 @@ namespace TwitchIrcChat
 
         private void SendMessage(string message)
         {
-            if (CurrentTab != 0)
-            {
-                Tabs[CurrentTab-1].SendMessage(message);
-            }
+            //if (CurrentTab != 0)
+            //{
+            //    Tabs[CurrentTab-1].SendMessage(message);
+            //}
 
         }
 
@@ -162,12 +162,46 @@ namespace TwitchIrcChat
                 Channel = "#" + text_chan.Text.ToString();
                 if (Nick.Length > 1 && Password.Length > 1 && Channel.Length > 1)
                 {
-                    textInput("Connected");
+                    //textInput("Connected");
                     //DataSend("jtvclient", null);
-                    isOnline = true;
-                    isDisconnected = false;
+                    try
+                    {
+                        IRCconnection = new TcpClient(Server, Port);
+                        ns = IRCconnection.GetStream();
+                        reader = new StreamReader(ns);
+                        writer = new StreamWriter(ns);
+                        DataSend("PASS", Password);
+                        DataSend("NICK", Nick);
+                        DataSend("USER", Nick);
+                        DataSend("CAP REQ :twitch.tv/membership", null);
+                        //DataSend("jtvclient", null);
+                        ReadStreamThread = new Thread(new ThreadStart(ReadIn));
+                        ReadStreamThread.Start();
+                        Timer.Start();
+                        isOnline = true;
+                        isDisconnected = false;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("EXCEPTION: " + e);
+                        textInput("Could not connect to server");
+                    }
+                    finally
+                    {
+                        if (reader == null)
+                        {
+                            reader.Close();
+                        }
+                        if (writer == null)
+                        {
+                            writer.Close();
+                        }
+                        if (ns == null)
+                        {
+                            ns.Close();
+                        }
+                    }
                 }
-                //Timer.Start();
                 if (RememberMe.IsChecked == true)
                 {
                     isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
@@ -244,6 +278,36 @@ namespace TwitchIrcChat
 
         #region irc methods
 
+        private void UpdateText_Tick(object sender, EventArgs e)
+        {
+            if (isDisconnected)
+            {
+                Part();
+            }
+            if (!IsLineRead && isOnline)
+            {
+                var input = new ServerInput(LineFromReader);
+                if (input.Type == MesseageType.Server)
+                {
+                    textInput(input.Messeage);
+                }
+                if (input.Type == MesseageType.Channel)
+                {
+                    try
+                    {
+                        Tabs.First(x => x.Channel == input.Property).ServerInput(LineFromReader);
+                    }
+                    //empty catch if messeage comes in after closing tab but before closing connection
+                    catch { }
+                }
+                if (input.Type == MesseageType.Ping)
+                {
+                    PingHandler();
+                }
+                IsLineRead = true;
+            }
+        }
+
         private void PingHandler()
         {
             words = LineFromReader.Split(ChatSeperator);
@@ -255,7 +319,6 @@ namespace TwitchIrcChat
 
         private void ReadIn()
         {
-            Console.WriteLine("OH SHIT");
             while (true && isOnline)
             {
                 try
@@ -263,6 +326,7 @@ namespace TwitchIrcChat
                     if (IsLineRead && reader != null)
                     {
                         LineFromReader = reader.ReadLine();
+                        Console.WriteLine(LineFromReader);
                         if (LineFromReader != null)
                         {
                             IsLineRead = false;
@@ -302,6 +366,7 @@ namespace TwitchIrcChat
                     channel = "#" + channel;
                 if (Tabs.Where(x => x.Channel == channel).Count() == 0)
                 {
+                    DataSend("JOIN", channel);
                     var index = Tabs.Count() + 1;
                     var newTab = new TabWindow(channel, this, index, BackgroundChatColor);
                     TabControl.Items.Add(newTab);
@@ -331,6 +396,25 @@ namespace TwitchIrcChat
             }
         }
 
+        private void Disconnect()
+        {
+            if (isOnline || isDisconnected)
+            {
+                if (isDisconnected)
+                    textInput("Disconnected from server");
+                else
+                {
+                    IsLineRead = false;
+                    ReadStreamThread.Abort();
+                    Timer.Stop();
+                    writer.Flush();
+                    writer.Close();
+                    reader.Close();
+                }
+                isOnline = false;
+            }
+        }
+
         #region window commands
 
         private void button_join_Click(object sender, RoutedEventArgs e)
@@ -350,7 +434,6 @@ namespace TwitchIrcChat
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("stuff");
             if (e.Key == Key.Enter && isOnline)
             {
                 var input = textBox1.Text;
@@ -372,6 +455,7 @@ namespace TwitchIrcChat
                     {
                         Tabs[TabControl.SelectedIndex - 1].SendMessage(input);
                     }
+
                     if (IsCurrent && Current != "")
                         Up.Push(Current);
                     MoveDownToUp();
@@ -478,7 +562,8 @@ namespace TwitchIrcChat
         {
             Settings.Default.MainWIndowPlacement = this.GetPlacement();
             Settings.Default.Save();
-            Tabs.ForEach(x => x.Part());
+            //Tabs.ForEach(x => x.Part());
+            Disconnect();
             Application.Current.Shutdown();
         }
 

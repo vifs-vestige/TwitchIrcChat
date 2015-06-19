@@ -109,6 +109,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ParaInfo.cs" />
+    <Compile Include="ServerInput.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
