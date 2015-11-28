@@ -98,7 +98,7 @@ namespace TwitchIrcChat
             {
                 words = input.Split(Main.ChatSeperator, 5);
                 //ReplyingUser = words[0].Remove(words[0].IndexOf('!')).TrimStart(':');
-                ReplyingUser = input.Split(':', '!')[1];
+                ReplyingUser = words[1].Split(':', '!')[1];
                 if (input.Contains("color=#"))
                 {
                     UserList.setColor(ReplyingUser, "#" + input.Split(';','#')[1]);
@@ -299,68 +299,73 @@ namespace TwitchIrcChat
 
         private void UpdateText_Tick(string input)
         {
-                //Console.WriteLine(LineFromReader);
-                if (input.Contains("PRIVMSG"))
+                Console.WriteLine(LineFromReader);
+            if (input.Contains("PRIVMSG"))
+            {
+                if (input.Contains(":USERCOLOR"))
                 {
-                    if (input.Contains(":USERCOLOR"))
+                    ParseColor(input);
+                }
+                else if (input.Contains(":CLEAR"))
+                {
+                    ClearText(input);
+                }
+                else
+                {
+                    WordSplitter(input);
+                }
+            }
+            else if (input.Contains("tmi.twitch.tv 353"))
+            {
+                string[] tempUsers;
+                tempUsers = input.Split(' ');
+                for (int i = 5; i < tempUsers.Length; i++)
+                {
+                    string temp;
+                    if (tempUsers[i].Contains(":"))
                     {
-                        ParseColor(input);
-                    }
-                    else if (input.Contains(":CLEAR"))
-                    {
-                        ClearText(input);
+                        temp = tempUsers[i].Substring(1);
                     }
                     else
                     {
-                        WordSplitter(input);
+                        temp = tempUsers[i];
                     }
-                }
-                else if (input.Contains("tmi.twitch.tv 353"))
-                {
-                    string[] tempUsers;
-                    tempUsers = input.Split(' ');
-                    for (int i = 5; i < tempUsers.Length; i++)
-                    {
-                        string temp;
-                        if (tempUsers[i].Contains(":"))
-                        {
-                            temp = tempUsers[i].Substring(1);
-                        }
-                        else
-                        {
-                            temp = tempUsers[i];
-                        }
-                        UserList.Add(temp);
-                        UpdateIfSelected();
-                    }
-                }
-                else if ((input.ToLower().Contains("mode ")) && (input.ToLower().Contains(" +o")))
-                {
-                    string[] tempMods;
-                    tempMods = input.Split(' ');
-                    string tempMod = tempMods[tempMods.Length - 1];
-                    UserList.Add(tempMod);
-                    UserList.AddMod(tempMod);
+                    UserList.Add(temp);
                     UpdateIfSelected();
                 }
-                else if (input.Contains("PART"))
-                {
-                    var tempUsername = input.Split('!')[0];
-                    tempUsername = tempUsername.Substring(1);
-                    UserList.Remove(tempUsername);
-                    UpdateIfSelected();
-                    if (Main.ShowJoinPart == true)
-                        PostText("-Parts- " + tempUsername, Main.JoinPartColor);
-                }
-                else if (input.Contains("JOIN"))
-                {
-                    var tempUsername = input.Split('!')[0];
-                    tempUsername = tempUsername.Substring(1);
-                    UserList.Add(tempUsername);
-                    UpdateIfSelected();
-                    if (Main.ShowJoinPart == true)
-                        PostText("-Joins- " + tempUsername, Main.JoinPartColor);
-                }
+            }
+            else if ((input.ToLower().Contains("mode ")) && (input.ToLower().Contains(" +o")))
+            {
+                string[] tempMods;
+                tempMods = input.Split(' ');
+                string tempMod = tempMods[tempMods.Length - 1];
+                UserList.Add(tempMod);
+                UserList.AddMod(tempMod);
+                UpdateIfSelected();
+            }
+            else if (input.Contains("PART"))
+            {
+                var tempUsername = input.Split('!')[0];
+                tempUsername = tempUsername.Substring(1);
+                UserList.Remove(tempUsername);
+                UpdateIfSelected();
+                if (Main.ShowJoinPart == true)
+                    PostText("-Parts- " + tempUsername, Main.JoinPartColor);
+            }
+            else if (input.Contains("JOIN"))
+            {
+                var tempUsername = input.Split('!')[0];
+                tempUsername = tempUsername.Substring(1);
+                UserList.Add(tempUsername);
+                UpdateIfSelected();
+                if (Main.ShowJoinPart == true)
+                    PostText("-Joins- " + tempUsername, Main.JoinPartColor);
+            }
+            else if (input.Contains("CLEARCHAT"))
+            {
+                ClearText(input);
+
+            }
         }
 
         private void UpdateIfSelected()
@@ -410,9 +415,9 @@ namespace TwitchIrcChat
             UserList.setColor(user, color);
         }
 
-        private void ClearText(string text)
+        public void ClearText(string text)
         {
-            var user = text.Split(' ')[4];
+            var user = text.Split(' ')[3].Replace(":","");
             var tempList = new List<Paragraph>();
             foreach (var item in EveryInput.Where(s => s.Value == user))
             {

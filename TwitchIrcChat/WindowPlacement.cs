@@ -62,6 +62,7 @@ namespace TwitchIrcChat
     {
         private static Encoding encoding = new UTF8Encoding();
         private static XmlSerializer serializer = new XmlSerializer(typeof(WINDOWPLACEMENT));
+    
 
         [DllImport("user32.dll")]
         private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WINDOWPLACEMENT lpwndpl);
@@ -71,6 +72,8 @@ namespace TwitchIrcChat
 
         private const int SW_SHOWNORMAL = 1;
         private const int SW_SHOWMINIMIZED = 2;
+
+        
 
         public static void SetPlacement(IntPtr windowHandle, string placementXml)
         {

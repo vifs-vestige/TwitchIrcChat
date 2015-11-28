@@ -18,7 +18,15 @@ namespace TwitchIrcChat
             Messeage = "";
             var temp = input.Split(' ');
             if (Input.StartsWith(":tmi.twitch.tv"))
-                ServerMesseage();
+                if (Input.Contains("CLEARCHAT"))
+                {
+                    Type = MesseageType.ClearChat;
+                    Property = Input.Split(' ')[2];
+                }
+                else
+                {
+                    ServerMesseage();
+                }
             else if (Input.Contains("PING"))
                 Ping();
             else
@@ -55,5 +63,5 @@ namespace TwitchIrcChat
         }
     }
 
-    enum MesseageType {Server, Channel, Ping};
+    enum MesseageType {Server, Channel, Ping, ClearChat};
 }

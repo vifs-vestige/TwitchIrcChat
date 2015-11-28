@@ -79,24 +79,49 @@ namespace TwitchIrcChat
             userList = temp;
             updateUserList();
         }
+        
+        private void WriteLog(int counter)
+        {
+            var file = new StreamWriter("C:\\test.txt");
+            file.WriteLine("test" + counter);
+            file.Close();
+        }
+
+        private void WriteLog(string s)
+        {
+            var file = new StreamWriter("C:\\test.txt");
+            file.WriteLine(s);
+            file.Close();
+        }
+        
+        public void MyHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            WriteLog(((Exception) e.ExceptionObject).Message);
+        }
 
         public MainWindow()
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
+            WriteLog(1);
+            InitializeComponent();
+            WriteLog(2);
             EmptyUserList = new UserList();
             Down.Push("");
             EveryInput = new Dictionary<Paragraph, string>();
-            InitializeComponent();
             EmoteList = new Emotes();
             image_test.Width = 0;
             Image_test = image_test;
+            WriteLog(3);
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromMilliseconds(200);
             Timer.Tick += new EventHandler(UpdateText_Tick);
             //Timer.Start();
+            WriteLog(4);
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
             isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
             Tabs = new List<TabWindow>();
+            WriteLog(5);
             if (isolatedStorage.FileExists(isoFile))
             {
                 RememberMe.IsChecked = true;
@@ -107,25 +132,33 @@ namespace TwitchIrcChat
                     text_pass.Password = sr.ReadLine();
                 }
             }
+            WriteLog(6);
             LoadDefaults();
+            WriteLog(7);
         }
 
         private void LoadDefaults()
         {
+            WriteLog("start load2");
             var converter = new BrushConverter();
+            WriteLog("before reading settings");
             BackgroundChatColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundChatColor);
             BackgroundUserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundUserColor);
             BackgroundTextBoxColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundTextBoxColor);
+            WriteLog("after background color");
             TextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextColor);
             JoinPartColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.JoinPartColor);
             TextBoxTextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextBoxTextColor);
             UserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.UserColor);
+            WriteLog("after more color");
             DateFormat = Settings.Default.DateFormat;
             ShowJoinPart = Settings.Default.ShowJoinPart;
             FlashOnText = Settings.Default.FlashOnText;
             FlashOnUser = Settings.Default.FlashOnUser;
             KeepOnTop = Settings.Default.KeepOnTop;
+            WriteLog("window shit");
             ApplySettings();
+            WriteLog("end load");
         }
 
         private void ApplySettings()
@@ -141,15 +174,13 @@ namespace TwitchIrcChat
             textBox1.Background = BackgroundTextBoxColor;
             textBox1.Foreground = TextBoxTextColor;
         }
-
-
-
+        
         private void SendMessage(string message)
         {
-            //if (CurrentTab != 0)
-            //{
-            //    Tabs[CurrentTab-1].SendMessage(message);
-            //}
+            if (CurrentTab != 0)
+            {
+                Tabs[CurrentTab-1].SendMessage(message);
+            }
 
         }
 
@@ -174,6 +205,7 @@ namespace TwitchIrcChat
                         DataSend("NICK", Nick);
                         DataSend("USER", Nick);
                         DataSend("CAP REQ :twitch.tv/membership", null);
+                        DataSend("CAP REQ :twitch.tv/commands", null);
                         DataSend("CAP REQ :twitch.tv/tags", null);
                         //DataSend("jtvclient", null);
                         ReadStreamThread = new Thread(new ThreadStart(ReadIn));
@@ -281,6 +313,7 @@ namespace TwitchIrcChat
 
         private void UpdateText_Tick(object sender, EventArgs e)
         {
+            WriteLog(8);
             if (isDisconnected)
             {
                 Part();
@@ -288,6 +321,7 @@ namespace TwitchIrcChat
             if (!IsLineRead && isOnline)
             {
                 var input = new ServerInput(LineFromReader);
+                
                 if (input.Type == MesseageType.Server)
                 {
                     textInput(input.Messeage);
@@ -305,8 +339,17 @@ namespace TwitchIrcChat
                 {
                     PingHandler();
                 }
+                if (input.Type == MesseageType.ClearChat)
+                {
+                    try
+                    {
+                        Tabs.First(x => x.Channel == input.Property).ClearText(LineFromReader);
+                    }
+                    catch { }
+                }
                 IsLineRead = true;
             }
+            WriteLog(9);
         }
 
         private void PingHandler()
@@ -563,7 +606,7 @@ namespace TwitchIrcChat
         {
             Settings.Default.MainWIndowPlacement = this.GetPlacement();
             Settings.Default.Save();
-            //Tabs.ForEach(x => x.Part());
+            Tabs.ForEach(x => x.Part());
             Disconnect();
             Application.Current.Shutdown();
         }
@@ -588,6 +631,10 @@ namespace TwitchIrcChat
             else
             {
                 var user = ((Run)inLines.First(x=> !((Run)x).Text.Contains("<"))).Text;
+                if(user == ">")
+                {
+                    user = ((Run)inLines.First(x => ((Run)x).Text.Contains("<"))).Text.Split('<').Last();
+                }
                 ContextMenuUser = user;
             }
             Console.WriteLine(sender);
@@ -637,37 +684,37 @@ namespace TwitchIrcChat
 
         void ban_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".ban " + ContextMenuUser);
+            SendMessage(".ban " + ContextMenuUser.Replace("@", ""));
         }
 
         void t600_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".timeout " + ContextMenuUser + " 600");
+            SendMessage(".timeout " + ContextMenuUser.Replace("@", "") + " 600");
         }
 
         void t300_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".timeout " + ContextMenuUser + " 300");
+            SendMessage(".timeout " + ContextMenuUser.Replace("@", "") + " 300");
         }
 
         void t60_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".timeout " + ContextMenuUser + " 60");
+            SendMessage(".timeout " + ContextMenuUser.Replace("@", "") + " 60");
         }
 
         void t1_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".timeout " + ContextMenuUser + " 1");
+            SendMessage(".timeout " + ContextMenuUser.Replace("@", "") + " 1");
         }
 
         void demote_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".unmod " + ContextMenuUser);
+            SendMessage(".unmod " + ContextMenuUser.Replace("@", ""));
         }
 
         void promote_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage(".mod " + ContextMenuUser);
+            SendMessage(".mod " + ContextMenuUser.Replace("@", ""));
         }
 
         #endregion

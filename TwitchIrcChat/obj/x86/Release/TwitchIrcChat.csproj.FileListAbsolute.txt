@@ -41,8 +41,6 @@ C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\ru\Xceed
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\TwitchIrcChat.exe.config
-C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TestWindow.baml
-C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TestWindow.g.cs
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\bin\Release\Emotes\EmoteOutputs.txt
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.Properties.Resources.resources
 C:\Users\shawn\Documents\GitHub\TwitchIrcChat\TwitchIrcChat\obj\x86\Release\TwitchIrcChat.csproj.GenerateResource.Cache
