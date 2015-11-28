@@ -80,48 +80,24 @@ namespace TwitchIrcChat
             updateUserList();
         }
         
-        private void WriteLog(int counter)
-        {
-            var file = new StreamWriter("C:\\test.txt");
-            file.WriteLine("test" + counter);
-            file.Close();
-        }
-
-        private void WriteLog(string s)
-        {
-            var file = new StreamWriter("C:\\test.txt");
-            file.WriteLine(s);
-            file.Close();
-        }
-        
-        public void MyHandler(object sender, UnhandledExceptionEventArgs e)
-        {
-            WriteLog(((Exception) e.ExceptionObject).Message);
-        }
 
         public MainWindow()
         {
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(MyHandler);
-            WriteLog(1);
             InitializeComponent();
-            WriteLog(2);
             EmptyUserList = new UserList();
             Down.Push("");
             EveryInput = new Dictionary<Paragraph, string>();
             EmoteList = new Emotes();
             image_test.Width = 0;
             Image_test = image_test;
-            WriteLog(3);
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromMilliseconds(200);
             Timer.Tick += new EventHandler(UpdateText_Tick);
             //Timer.Start();
-            WriteLog(4);
             userList = new UserList();
             Text_UserList.Document.PageWidth = 1000;
             isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
             Tabs = new List<TabWindow>();
-            WriteLog(5);
             if (isolatedStorage.FileExists(isoFile))
             {
                 RememberMe.IsChecked = true;
@@ -132,33 +108,25 @@ namespace TwitchIrcChat
                     text_pass.Password = sr.ReadLine();
                 }
             }
-            WriteLog(6);
             LoadDefaults();
-            WriteLog(7);
         }
 
         private void LoadDefaults()
         {
-            WriteLog("start load2");
             var converter = new BrushConverter();
-            WriteLog("before reading settings");
             BackgroundChatColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundChatColor);
             BackgroundUserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundUserColor);
             BackgroundTextBoxColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.BackgroundTextBoxColor);
-            WriteLog("after background color");
             TextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextColor);
             JoinPartColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.JoinPartColor);
             TextBoxTextColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.TextBoxTextColor);
             UserColor = (SolidColorBrush)converter.ConvertFromString(Settings.Default.UserColor);
-            WriteLog("after more color");
             DateFormat = Settings.Default.DateFormat;
             ShowJoinPart = Settings.Default.ShowJoinPart;
             FlashOnText = Settings.Default.FlashOnText;
             FlashOnUser = Settings.Default.FlashOnUser;
             KeepOnTop = Settings.Default.KeepOnTop;
-            WriteLog("window shit");
             ApplySettings();
-            WriteLog("end load");
         }
 
         private void ApplySettings()
