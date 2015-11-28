@@ -281,7 +281,6 @@ namespace TwitchIrcChat
 
         private void UpdateText_Tick(object sender, EventArgs e)
         {
-            WriteLog(8);
             if (isDisconnected)
             {
                 Part();
@@ -317,7 +316,6 @@ namespace TwitchIrcChat
                 }
                 IsLineRead = true;
             }
-            WriteLog(9);
         }
 
         private void PingHandler()
