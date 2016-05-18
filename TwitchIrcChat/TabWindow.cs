@@ -101,7 +101,7 @@ namespace TwitchIrcChat
                 ReplyingUser = words[1].Split(':', '!')[1];
                 if (input.Contains("color=#"))
                 {
-                    UserList.setColor(ReplyingUser, "#" + input.Split(';','#')[1]);
+                    UserList.setColor(ReplyingUser, "#" + input.Split(';','#')[2]);
                 }
                 FormatedMessage = words[4].Remove(0, 1);
                 ParaOutput(FormatedMessage, ReplyingUser);
